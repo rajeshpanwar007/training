@@ -1,0 +1,23 @@
+body{
+    background-color: #00ffff;
+    
+}
+
+h1 {
+    color:#FF0000;
+    text-align: center;
+    background-color:#FFFF00;
+}
+p{
+    font-family: Arial;
+    font-size: 20px;
+    color: green;
+}
+
+a:link {color:#0000ff;text-decoration:none;}
+a:hover {color:red;font-weight:bold;text-decoration:none;}
+a:visited {text-decoration:none;}
+
+#para{text-align:center;}
+.mycenter{text-align:center;color:red;background-color:#800000;}
+p.mycenter1{text-align:right;color:blue;background-color:#008000;)

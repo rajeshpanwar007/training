@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            event Example
+        </title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+        </script>
+        <script>
+        
+        	$(document).ready(function(){
+        		$("h2").mouseenter(function(){
+        			$(this).css("color","blue");
+        			alert("mouse enter event");
+        		});
+        		$("p").hover(function(){
+        			alert("you enter the paragraph");
+        		},
+        		function(){
+        			alert("you leaves the paragraph");
+        		});
+        		$("input").focus(function(){
+        			$(this).css("background-color","red");
+        		});
+        		$("input").blur(function(){
+        			$(this).css("background-color","green");
+        		});
+        		
+        	});
+        	
+        	
+        </script>
+    </head>
+    <body>
+    	<h2>Heading here</h2>
+        <p>this is the first paragraph</p>
+        <p>This is the second paragraph</p>
+        
+        <form>
+        name:	<input type="text" size=30 /><br>
+        Password : <input type="text" />
+        </form>
+    </body>
+    
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery8.js">
+</script>
+<script> 
+$(document).ready(function(){
+  $("#mybutton1").click(function(){
+    $("div").css("background-color","red");
+    $("div").animate({
+      left:'250px',
+      opacity:'1',
+      height:'400px',
+      width:'400px',
+    });
+  });
+	$("#mybutton2").click(function(){
+    $("div").css("background-color","green");
+    $("div").animate({
+      left:'0px',
+      opacity:'1',
+      height:'100px',
+      width:'100px',
+    });
+  }); 
+});
+</script> 
+</head>
+ 
+<body>
+<button id="mybutton1">Start Animation</button>
+<button id="mybutton2">Origanal position</button>
+<p>By default, all HTML elements have a static position, and cannot be moved. To manipulate the position, remember to first set the CSS position property of the element to relative, fixed, or absolute!</p>
+<div style="background:#00ff00;height:100px;width:100px;position:absolute;">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+	
+</script>
+<script>
+	function getCookie() {
+		var c_name = "user";
+		var i, x, y, ARRcookies = document.cookie.split(";");
+		for (i = 0; i < ARRcookies.length; i++) {
+			x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+			y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+			x = x.replace(/^\s+|\s+$/g, "");
+			if (x == c_name) {
+				var y2 = unescape(y);
+				var d = document.getElementById("showdiv");
+				d.innerHTML = y2;
+			}
+		}
+	}
+	function startanimation() {
+		$("#p1").css("color", "red").slideUp(2000).slideDown(2000,
+				startanimation);
+	}
+	$(document).ready(
+			function() {
+				function startanimation() {
+					$("#p1").css("color", "red").slideUp(2000).slideDown(2000,
+							startanimation);
+				}
+				$("button").click(
+						function() {
+							startanimation();
+							function startanimation() {
+								$("#p1").css("color", "red").slideUp(2000)
+										.slideDown(2000, startanimation);
+							}
+
+						});
+				$("#div1").mouseenter(function() {
+					start2();
+					function start2() {
+						$("#div1").animate( {
+							height : '200px',
+							opacity : '0.75'
+						}, 2000, "swing").animate( {
+							width : '200px',
+							opacity : '0.25'
+						}, 2000, "swing").animate( {
+							height : '100px',
+							opacity : '0.75'
+						}, 2000, "swing").animate( {
+							width : '100px',
+							opacity : '1'
+						}, 2000, "swing", start2)
+					}
+				});
+
+			});
+</script>
+</head>
+<body onLoad="getCookie()">
+
+<p id="p1">jQuery is fun!!</p>
+<button>Click me</button>
+<div id="div1"
+	style="height: 100px; width: 100px; background-color: #FF3300"></div>
+<div id="showdiv"><b></b></div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            document write and goback
+        </title>
+        <script>
+        	function goBack () {
+			  window.history.back();
+			}
+			function goForward (){
+			  document.write("hello!! this is the next page");
+			  document.write("<button onclick='goBack()'>back</button>");
+			}
+        </script>
+    </head>
+    <body>
+    	<h2>hello this is your page</h2>
+        <button onclick="goForward()">forward</button>
+    </body>
+    
+</html>

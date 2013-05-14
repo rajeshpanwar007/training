@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            validating numeric number
+        </title>
+    </head>
+    <body>
+        <h1>My JavaScript language example........<br>
+        	Validating a input as number!!!!!!!!!!!!!
+        </h1>
+        <script>
+        	function validNumber () {
+			  	var num=document.getElementById("demo").value;
+			  	if(num==""||isNaN(num)){
+			  		alert("Not the numeric number:");
+			  		console.log(num);
+			  	}
+			}
+		</script>
+		
+		Enter the Number<input type="text" id="demo" />
+		<button  onclick="validNumber()"  type="button">Click!</button>
+        
+    </body>
+    
+</html>

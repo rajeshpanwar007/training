@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            using the timing function 
+        </title>
+        <script>
+        	var timer;
+        	function startTimer () {
+			  timer=setInterval(function(){showTimer()},1000);
+			}
+        	function showTimer () {
+        		var d=new Date();
+        		var t=d.toLocaleTimeString();
+        		document.getElementById("one").innerHTML=t;
+			}
+			function stopTimer () {
+			  clearInterval(timer);
+			}
+			function after3(){
+				var d=new Date();
+        		var t=d.toLocaleTimeString();
+				setInterval(function () {alert("3 second have been passed")},3000);
+			}
+        </script>
+    </head>
+    <body>
+        <h4>
+        	using the setInterval method and clearInterval method:
+        </h4>
+        <button onclick="startTimer()">Start</button>
+        <button onclick="stopTimer()">Stop</button>
+        <button onclick="after3()">alert me after 3 second</button>
+        <br>
+        <br>
+        <div id="one"> </div>
+    </body>
+    
+</html>

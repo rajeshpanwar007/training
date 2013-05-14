@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Creating a array
+        </title>
+        
+    </head>
+    <body>
+        <h1>Creating the array</h1>
+        <script>
+        
+        	/*
+			var cars =new Array();
+						cars[0]="BMW";
+						cars[1]="maruti";
+						cars[2]="verna";*/
+			
+			//var cars=new Array("BMW","verna","maruti");
+			var cars=["verna","maruti","BMW"];
+        	
+        	document.write("value of cars[2] : "+cars[2]);
+        	
+        	//Array of diffferent object
+        	var difObj=new Array();
+        	difObj[0]=Date();
+        	difObj[1]="hello i am here";
+        	difObj[2]=cars;
+        	
+       /*
+            document.write("<br>value of difObj[0] : "+difObj[0]);
+                   document.write("<br>value of difObj[1] : "+difObj[1]);
+                   document.write("<br>value of difObj[2] : "+difObj[2]);*/
+                  
+                  var x="";
+                  for(x in difObj)
+                  {
+                  	document.write("<br>value .....  of difObj["+x+"] : "+difObj[x]);
+                  }
+       
+
+        </script>
+    </body>
+    
+</html>

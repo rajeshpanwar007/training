@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>
+			performing the action on date
+		</title>
+	</head>
+	<body onload="startTime()">
+		<script>
+			var d=new Date();
+			document.write("Current date and time is :"+d);
+			document.write("<br>d.getFullYear():"+d.getFullYear());
+			document.write("<br>number of milisecond since midnight January 1,1970:"+d.getTime());
+			d.setFullYear(2015,0,1);
+			document.write("<br>date after changing :"+d);
+			document.write("<p><b>Remember</b> that JavaScript counts months from 0 to 11.Month 10 is November.</p>")
+			var weekday=new Array(7);
+			weekday[0]="Sunday";
+			weekday[1]="Monday";
+			weekday[2]="Tuesday";
+			weekday[3]="Wednesday";
+			weekday[4]="Thursday";
+			weekday[5]="Friday";
+			weekday[6]="Saturday";
+			document.write("<br>Day :"+weekday[d.getDay()]);	
+		</script>
+		
+	</body>
+</html>

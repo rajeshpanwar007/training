@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>
+			JQUERY EXAMPLE
+		</title>
+		<script src="jquery8.js">	
+		</script>
+		<script>
+		//function start()
+		//{
+			$(document).ready(function(){
+				$("#start").click(function(){
+					
+					var div=$("div")
+					div.animate({ height:'300px',opacity:'0.6',fontSize:"1em"},5000);
+					div.animate({ width:'300px',opacity:'0.3',fontSize:"2em"},5000);
+					div.animate({ height:'100px',opacity:'0.6',fontSize:"3em"},5000);
+					div.animate({ width:'100px',opacity:'0.9',fontSize:"2em"},5000);
+				});
+					
+			});
+			//start();
+		//}
+		function stopA()
+		{
+			$(document).ready(function()
+			{
+					$("div").stop();
+					
+			});
+		}
+		</script>
+	</head>
+	<body>
+		<h2>animate method use</h2>
+		<button onclick="start()" id="start">try me</button>
+		<button onclick="stopA()">Stop</button>
+		<br>
+		<br>
+		<div style="background-color: #00ff00; width: 100px; height: 100px;position:relative;padding: 40px;">
+			hello
+		</div>
+		<br>
+		hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+		mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+		nnnnnnnnnnnn nnnnnnnnnnnnn
+		jjjjjjjj nnnnn  kjkj jkj kl jkljklj
+	</body>
+</html>

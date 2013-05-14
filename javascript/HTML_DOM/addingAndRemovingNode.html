@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            adding and removing the html element
+        </title>
+    </head>
+    <body>
+        <h1>Adding new element to existing elements</h1>
+        <div id="one">
+        	<p id="p1">this is the first paragraph in div one</p>
+        	<p id="p2">this is the second paragraph in div one</p>
+        </div>
+        
+        <script>
+        		var para=document.createElement("p");
+        		var node=document.createTextNode("this is the new paragraph added by scripting");
+        		para.appendChild(node);
+        		
+        		var parent=document.getElementById("one");
+        		parent.appendChild(para);
+        		
+        </script>
+        	
+        <br>
+        <br>
+        <h1>Removing existing elements</h1>
+        <div id="two">
+        	<p id="p11">this is the first paragraph in div two</p>
+        	<p id="p2">this is the second paragraph in div two</p>
+        </div>
+        
+        <script>
+        		var child=document.getElementById("p11");
+        		
+        		var parent=document.getElementById("two");
+        		parent.removeChild(child);
+        		
+        </script>
+        
+    </body>
+    
+</html>

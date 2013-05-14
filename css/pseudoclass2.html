@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+		p:first-child
+		{
+			color:blue;
+		} 
+		p > b:first-child
+		{
+			color:#0000FF;
+		}
+		q:lang(no){
+    			quotes: "@" "@";
+		} 
+</style>
+</head>
+
+<body>
+		<p>This is some text.</p>
+		<p>This is some text.</p>
+		<p><b>Note:</b> For :first-child to work in IE8 and earlier, a DOCTYPE must be declared.</p>
+		<p>i am the <b>strong</b> man but you are also the <b>Strong</b> man</p>
+		here is next:
+		<p>i am the <b>strong</b> man but you are also the <b>Strong</b> man</p>
+
+ 		He said,<q>i am a good man</q><br>
+		He also said,<q lang="no">i am a good man</q>
+</body>
+</html>

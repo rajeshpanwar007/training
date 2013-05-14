@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>
+			hiding the part of string
+		</title>
+		<script src="jquery8.js">
+		</script>
+		<script>
+			$(document).ready(function(){
+				$(".ex .hider").click(function(){
+					$(this).parents(".ex").hide("slow");
+				});
+			});
+		</script>
+		<style type="text/css">
+			div.ex{
+				background-color : #00ff00;
+				padding:7px;
+				border : solid 1px #ff0000;		
+			}
+		</style>
+	</head>
+	<body>
+		<h3>Name : Rajesh</h3>
+		<div class="ex">
+			<button class="hider" >Hide</button>
+			<p>
+				Contact: v.p.o Saidpur,<br>
+				distt. Sonepat,<br>Haryana
+			</p>
+		</div>
+		
+		<h3>Name : Panwar</h3>
+		<div class="ex">
+			<button class="hider" >Hide</button>
+			<p>
+				Contact: v.p.o Alipur,<br>
+				distt. Narela,<br>Delhi
+			</p>
+		</div>
+	</body>
+</html>

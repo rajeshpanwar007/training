@@ -1,0 +1,24 @@
+img.one{
+    float:right;
+    
+}
+h1:hover{
+    background-color:green;
+}
+img.two{
+    float:left;
+    width:200px;
+    height:200px;
+    margin:5px;
+}
+.breakflaot
+{
+clear:both;
+margin-bottom:2px;
+}
+
+
+.breakflaot:hover {
+    color:red;
+    background-color:black;
+}

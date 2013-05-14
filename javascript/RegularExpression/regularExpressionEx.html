@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Test the regular Expression
+        </title>
+    </head>
+    <body>
+        <script>
+        	//var patt=new RegExp("here","g");
+        	var patt=/Hi/gi;
+        	var str="hi....., i am here.Hi,how are you,hi who are you";
+        	document.write(str+"<br>");
+        	document.write(patt+"<br>");
+        	document.write("str.match(patt) :"+str.match(patt));
+        	
+        	var patt1=new RegExp("how","gi");
+        	document.write("<br>patt1.test(str) :"+patt1.test(str));
+        	document.write("<br>patt1.exec(str) :"+patt1.exec(str));
+        	document.write("<br>patt1.exec(str) :"+patt1.exec(str));
+        	document.write("<br>patt1.exec(str) :"+patt1.exec(str));
+        	document.write("<br>patt1.exec(str) :"+patt1.exec(str));
+        	document.write("<br>patt1.exec(str) :"+patt1.exec(str));
+        	document.write("<br>patt1.exec(str) :"+patt1.exec(str));
+        	
+        	
+        	var pat=new RegExp("Am","i");
+        	document.write("<br>pat.exec(str) :"+pat.exec(str));
+        	document.write("<br>patt1.exec(str) :"+patt1.exec(str));
+        	document.write("<br>patt1.exec(str) :"+patt1.exec(str));
+        	
+        	
+        	var str="Hellooo World! Hello W3Schools!"; 
+			var patt1=/o+/g;
+			document.write("<br><br>"+str);
+			document.write("<br>"+patt1);
+			document.write("<br>"+str.match(patt1));
+			document.write("<br>first :"+patt1.exec(str));
+			document.write("<br>Second1 :"+patt1.exec(str));
+			document.write("<br>Second2 :"+patt1.test(str));
+			document.write("<br>Second3 :"+patt1.test(str));
+			document.write("<br>Second4 :"+patt1.exec(str));
+			document.write("<br>Second5 :"+patt1.exec(str));
+			document.write("<br>Second :"+patt1.exec(str));
+			document.write("<br>Second :"+patt1.exec(str));
+			document.write("<br>Second :"+patt1.exec(str));
+			document.write("<br>Second :"+patt1.test(str));
+			document.write("<br>Second :"+patt1.test(str));
+			
+			
+        </script>
+    </body>
+    
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE Html>
+<html lang="en">
+<head>
+	<style type="text/css">
+	#tbl
+	{
+		text-align:left;
+		color:#000066;
+	}
+	input
+	{
+		color:#000066;
+	}
+	textarea
+	{
+		color:#000066;
+	}
+	select
+	{
+		color:#000066;
+	}
+	</style>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	
+	function display1()
+	{
+		getrow();
+		var mrow = sessionStorage.mrow;
+        mrow--;
+        mrow++;
+        
+        
+        	document.write("<html><body><table border=1>");
+            document.write("<tr>");
+        	try{
+                if(window.openDatabase)
+                {
+                	db.transaction(function(tx) {
+                		   tx.executeSql("SELECT * FROM peopleinfo", [],
+                		      function(tx, result) {
+                			   document.write("<html><body><table border=1px>");
+                			   for(row=0;row<=mrow;row++)
+                			   {
+                 		      	document.write("<th>");
+                 		      	document.write(result.rows.item(row)["fname"]);
+                 		      	document.write("</th>");
+                 		      	document.write("<th>");
+                 		      	document.write(result.rows.item(row)["lname"]);
+                 		      	document.write("</th>");
+                 		      	document.write("<th>");
+                		         document.write(result.rows.item(row)["address"]);
+                		         document.write("</th>");
+                		         document.write("<th>");
+                		         document.write(result.rows.item(row)["pin"]);
+                		         document.write("</th>");
+                		         document.write("<th>");
+                		         document.write(result.rows.item(row)["mobile"]);
+                		         document.write("</th>");
+                		         document.write("<th>");
+                		         document.write(result.rows.item(row)["gender"]);
+                		         document.write("</th>");                		        
+                		         document.write("<th>");
+                		         document.write(result.rows.item(row)["dob"]);
+                		         document.write("</th>");
+                		         document.write("<th>");
+                		         document.write(result.rows.item(row)["hobby1"]);
+                		         document.write("</th>");
+                		         document.write("<th>");
+                		         document.write(result.rows.item(row)["hobby2"]);
+                		         document.write("</th>");
+                		         document.write("<th>");
+                		         document.write(result.rows.item(row)["email"]);
+                		         document.write("</th>");
+                		         document.write("</tr>");
+                			   }
+                			   
+                		        
+                		        
+                		        document.write("</table></body></html>");
+                		         
+                		      },
+                		      function(tx, error){
+                		         // error occured
+                		      }
+                		   );
+                		});
+    			}
+                }
+                
+            catch(e)
+            {
+                alert(e);
+            }
+            
+	}
+	
+	function display(x)
+	{
+		
+		if(x.name == "btnfirst")
+		{
+			sessionStorage.row = 0;
+			row = 0;
+		}
+		else if(x.name == "btnlast")
+		{
+			getrow();
+			row = sessionStorage.mrow;
+			sessionStorage.row = row;			
+			row = ++row
+			row = --row;
+			
+		}
+		else if(x.name == "btnpre")
+		{
+			row = sessionStorage.row;
+			if(row == 0)
+			{
+				getrow();
+				row = sessionStorage.mrow;
+				sessionStorage.row = row;
+			}
+			else
+			{
+				row--;
+				sessionStorage.row = row;
+			}
+		}
+		else if(x.name == "btnnext")
+			{
+				row = sessionStorage.row;
+				getrow();
+				mrow = sessionStorage.mrow;
+				if(row == mrow)
+				{
+					row = 0;
+					sessionStorage.row = 0;
+				}
+				else
+				{
+					row++;
+					sessionStorage.row = row;
+				}
+			}
+		
+		try{
+            if(window.openDatabase)
+            {
+            	db.transaction(function(tx) {
+            		   tx.executeSql("SELECT * FROM peopleinfo", [],
+            		      function(tx, result) {
+             		      	var f = document.frminput;
+            		         f.txtfname.value = result.rows.item(row)["fname"];
+            		         f.txtlname.value = result.rows.item(row)["lname"];
+            		         f.txtaddress.value = result.rows.item(row)["address"];
+            		         f.txtpin.value = result.rows.item(row)["pin"];
+            		         f.txtmobile.value = result.rows.item(row)["mobile"];
+            		         var g = result.rows.item(row)["gender"];
+            		         if(g == "m")
+            		         {
+                		         var m = document.getElementById("male");
+                		         m.checked = true;
+            		         }
+            		         else
+            		         {
+            		        	 var f = document.getElementById("female");
+                		         f.checked = true;
+            		         }
+            		         f.dob.value = result.rows.item(row)["dob"];
+            		         f.email.value = result.rows.item(row)["email"];
+            		         
+            		      },
+            		      function(tx, error){
+            		         // error occured
+            		      }
+            		   );
+            		});
+			}
+            }
+            
+        catch(e)
+        {
+            alert(e);
+        }
+	}
+	function loadfunc()
+	{
+		var shortName = 'mydb';
+  		var version = '3';
+  		var displayName = 'user info';
+  		var maxSize = 85536;
+  		db = openDatabase(shortName, version, displayName, maxSize);
+	}
+		function savedata()
+		{
+			
+			try{
+	            	if(window.openDatabase)
+	              	{
+	              		var shortName = 'mydb';
+	              		var version = '3';
+	              		var displayName = 'user info';
+	              		var maxSize = 65536;
+	              		db = openDatabase(shortName, version, displayName, maxSize);
+	              		/*var sql = 'drop table peopleinfo';
+	              		executeQuery(sql);*/
+	              		var sql = 'CREATE TABLE if not exists peopleinfo(fname text,lname text,address text,pin integer,mobile text primary key,gender text,dob numeric,email text,hobby1 text,hobby2 text,image blob)';
+						console.log(sql);
+	              		/*db.transaction(
+		           		         function(transaction){
+		           		         transaction.executeSql(sql,[],function(transaction,result){alert("hello2")},function(transaction,result){alert("hello1")})
+		           		         });*/
+		           		executeQuery(sql);
+	                    var x = document.getElementById("frminput");
+	        			var g = "0";
+	        			if(document.getElementById("male").checked == true)
+	        			{
+	        				g = "m";
+	        			}
+	        			else if(document.getElementById("female").checked == true)
+	        			{
+	        				g = "f";
+	        			}
+	        			var h = new Array();
+	        			var j = 0;
+	        			for(i = 0;i< 5;i++)
+	        			{
+	        				if(x.selhobbies.options[i].selected)
+	        				{
+	        					h[j] = x.selhobbies.options[i].text;
+	        					j++;
+	        				}
+	        			}
+	        			var input = document.getElementById("file");
+	        			var i = document.getElementById("image");
+	        			var img;
+	        			if (input.files && input.files[0]) {
+	                        var reader = new FileReader();
+	                        reader.onload = function (e) {
+	                            img = e.target.result;
+	                        }
+	                        reader.readAsDataURL(input.files[0]);
+	        			}
+	                    sql = 'insert into peopleinfo VALUES ("'+x.txtfname.value+'","'+x.txtlname.value+'","'+x.txtaddress.value+'",'+x.txtpin.value+','+x.txtmobile.value+',"'+g+'","'+x.dob.value+'","'+x.email.value+'","'+h[0]+'","'+h[1]+'","")';
+						console.log(sql);
+	                    /*db.transaction(
+		           		         function(transaction){
+		           		         transaction.executeSql(sql);
+		           		         });*/
+          		        executeQuery(sql,function(results){alert(results)});
+          		        
+          		         
+	        		}
+	    	              
+	     		}catch(e)
+	     		{
+	                 alert("Mobile number must be different");
+	            }
+			
+		}
+		function loadfile()
+		{
+			var input = document.getElementById("file");
+			var i = document.getElementById("image");
+			if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+		}
+		
+		function executeQuery($query,callback){
+		     try{
+		         if(window.openDatabase){
+		         db.transaction(
+		         function(tx){
+		         tx.executeSql($query,[],function(tx,result){
+		         if(typeof(callback) == "function"){
+		                 callback(result);
+		         }else{
+		                 if(callback != undefined){
+		                       eval(callback+"(result)");
+		                  }
+		         }
+		         },function(tx,error){});
+		          });
+		           return rslt;
+		         }
+		         }catch(e){}
+		         }
+			
+        function getrow()
+        {
+            try{
+                if(window.openDatabase)
+                {
+                	db.transaction(function(tx) {
+                		   tx.executeSql("SELECT count(*) FROM peopleinfo", [],
+                		      function(tx, result) {
+                		         mrow = result.rows.item(0)["count(*)"];
+                		         mrow = mrow -1;
+                		         sessionStorage.mrow = mrow;
+                		      },
+                		      function(tx, error){
+                		         // error occured
+                		      }
+                		   );
+                   		});
+				}
+                }
+                
+            catch(e)
+            {
+
+            }
+            
+        }
+		function txtareafocus()
+		{
+			var check = new RegExp("Enter");
+			var a = document.frminput.txtaddress.value;
+			if(check.test(a))
+			{
+				document.frminput.txtaddress.value = "";
+			}
+		}
+		function selhobbiesblur()
+		{
+			var t = document.frminput.selhobbies;
+			var x = 0;
+			for(i = 0;i< 5;i++)
+			{
+				if(t.options[i].selected)
+				{
+					x++;
+				}
+			}
+			if(x>=3)
+			{
+				for(i = 0;i< 5;i++)
+				{
+					if(t.options[i].selected)
+					{
+						t.options[i].selected = false;
+					}
+				}
+				t.title = "Choose only 2 hobbies";
+			}
+			else
+			{
+				t.title = "";
+			}
+		}
+		function deleteit()
+		{
+			try{
+            	if(window.openDatabase)
+              	{
+              		var shortName = 'mydb';
+              		var version = '3';
+              		var displayName = 'user info';
+              		var maxSize = 65536;
+              		db = openDatabase(shortName, version, displayName, maxSize);
+              		var sql = 'delete from peopleinfo where mobile = "'+document.frminput.txtmobile.value+'"';
+              		executeQuery(sql);
+              		
+					
+        		}
+    	              
+     		}catch(e)
+     		{
+                 alert("Unable to delete");
+            }
+		}
+		function txtpinblur()
+		{
+			var a = document.frminput.txtpin.value;
+			if(a != "")
+			{
+			if((a > 110000)&& (a<859999))
+			{
+				document.frminput.txtpin.title = "";
+				
+			} 
+			else
+			{
+				document.frminput.txtpin.value = "";
+				document.frminput.txtpin.title = "Invalid pin";
+				document.frminput.txtpin.focus();
+			}
+			}
+		}
+		function txtmobileblur()
+		{
+			var a = document.frminput.txtmobile.value;
+			if(a != "")
+			{
+			if((a > 8000000000)&& (a <= 9999999999))
+			{
+				document.frminput.txtmobile.title = "";
+			} 
+			else
+			{
+				document.frminput.txtmobile.value = "";
+				document.frminput.txtmobile.title = "Invalid Mobile No.";
+				document.frminput.txtmobile.focus();
+			}
+			}
+		}
+	</script>
+	<script>
+	$(document).ready(function(){
+		  $(".field").focus(function(){
+		    $(this).css("background-color","#cccccc");
+		  });
+
+		  $(".field").blur(function(){
+			    $(this).css("background-color","#ffffff");
+			  });
+
+		  $("#btnsubmit").click(function(){
+			  	var t = document.frminput;
+			  	var r = 0;
+			    if((t.txtfname.value == "")||(t.txtfname.value == null))
+			    {
+				    r++;
+			    	$("#txtfname").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    var check = new RegExp("Enter");
+			    if((t.txtaddress.value == "")||(t.txtaddress.value == null)|| check.test(document.frminput.txtaddress.value))
+			    {
+				    r++;
+			    	$("#txtaddress").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    if((t.txtpin.value == "")||(t.txtpin.value == null))
+			    {
+				    r++;
+			    	$("#txtpin").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    if((t.txtmobile.value == "")||(t.txtmobile.value == null))
+			    {
+				    r++;
+			    	$("#txtmobile").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    if((t.dob.value == "")||(t.dob.value == null))
+			    {
+				    r++;
+			    	$("#dob").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    if((t.email.value == "")||(t.email.value == null))
+			    {
+				    r++;
+			    	$("#email").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    if(r == 0)
+			    {
+				    savedata();
+			    }
+			  });
+		});
+	</script>
+</head>
+<body onload="loadfunc()">
+		<center>
+		<h1>Welcome</h1>
+		<form name="frminput" id="frminput">
+		<table id="tbl">
+			<tr>
+				<td>First Name*</td>
+				<td><input required type="text" name="txtfname" id = "txtfname" class="field" size="50"/></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input type="text" name="txtlname" id="txtlname" class="field" size="50"/></td>
+			</tr>
+			<tr>
+				<td valign="top">Address*</td>
+				<td><textarea required wrap="hard" name="txtaddress" id="txtaddress" class="field" rows="3" cols="39" maxlength="100" onFocus="txtareafocus()">Enter Your address</textarea></td>
+			</tr>
+			<tr>
+				<td>Pin code*</td>
+				<td><input id="txtpin" required type="text" name="txtpin" class="field" size="50" onBlur="txtpinblur()"/></td>
+			</tr>
+			<tr>
+				<td>Mobile No.*</td>
+				<td><input id="txtmobile" required type="text" name="txtmobile" class="field" size="50" onBlur="txtmobileblur()"/></td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td><input type="radio" id="male" name="gender" class="field" value="male" checked="checked"/>Male</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="radio" id = "female" name="gender" class="field" value="female"/>Female</td>
+			</tr>
+			<tr>
+				<td>Email ID*</td>
+				<td><input id = "email" required type="email" name="email" class="field" size="50" /></td>
+			</tr>
+			<tr>
+				<td>D.O.B*</td>
+				<td><input id = "dob" required type="date" name="dob" class="field" size="50" /></td>
+			</tr>
+			<tr>
+				<td valign="top">Hobbies</td>
+				<td><select name="selhobbies" multiple="multiple" size="3" title="Hold ctrl to select multiple hobbies" onBlur="selhobbiesblur()">
+					<option value="reading">Reading</option>
+					<option value="cricket">Cricket</option>
+					<option value="football">Football</option>
+					<option value="listen">Listen to Songs</option>
+					<option value="watch">Watching Movies</option>
+					<option value="videogame">Video Games</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Your snap</td>
+				<td><input type="file" id="file" name="file" class="field" onmouseout="loadfile()"/></td>
+			</tr>
+			<tr><td colspan="2"><img src="" height="200" width="200" id="image" name="image" class="field" alt="you pic"/></td></tr>
+		</table>
+		<input type="button" Value="&lt;&lt;" name="btnfirst" onclick="display(this)"/>
+		<input type="button" Value="&lt;" name="btnpre" onclick="display(this)"/>
+		<input type="button" Value="&gt;" name="btnnext" onclick="display(this)"/>
+		<input type="button" Value="&gt;&gt;" name = "btnlast" onclick="display(this)"/>
+		<input type="button" Value="Show Table" onclick="display1()"/>
+		<input type="button" Value="submit" id="btnsubmit" />
+		<input type="button" Value="Delete" id="btndelete" onclick="deleteit()"/>
+		<input type = "reset" Value="Reset"/>
+		</form>
+	</center>
+</body>
+
+</html>

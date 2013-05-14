@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            User Information
+        </title>
+        <script>
+        	function mytextarea (x) {
+        		var str=x.innerHTML;
+        		var patt=/Enter your/gi;
+        		if(patt.test(str)){
+        			x.innerHTML="";
+        		}
+			}
+			function validateForm () {
+			  var x=document.myform.fname.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the First name");
+			  	return false;
+			  }	
+			  var x=document.myform.lname.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the last name");
+			  	return false;
+			  }	
+			  var x=document.myform.mobileno.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the Mobile Number");
+			  	return false;
+			  }	
+			  if(isNaN(x)||x>9999999999||x<7777777777){
+			  	alert("pls enter the valid mobile number <br>it should be 10 digits number");
+			  	return false;	
+			  }	
+			  var x=document.myform.email.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the email id ");
+			  	return false;
+			  }		
+			  var atpos=x.indexOf("@");
+				var dotpos=x.lastIndexOf(".");
+				if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+  				{
+  						alert("Not a valid e-mail address");
+ 					 return false;
+  					}  
+			  var x=document.myform.address.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the address ");
+			  	return false;
+			  }	
+			  
+			  var x=document.myform.pincode.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the pincode ");
+			  	return false;
+			  }	 
+			  if(isNaN(x)||x<0||x>999999)		{
+			  	alert("pls enter the valid pincode");
+			  	return false;
+			  }					  
+			}
+			
+
+			
+			
+        </script>
+    </head>
+    <body >
+        <h3>User Information :</h3>
+        <form name="myform" action="MyNext.html" onsubmit="return validateForm()">
+        	<table>
+        		<div id="one"> </div>
+        		<tr >
+        			<td >First Name* :</td>
+        			<td><input  type="text" name="fname" class="field" size="30" /></td>
+        		</tr>
+        		<tr>
+        			<td>Fast Name* :</td>
+        			<td><input type="text" name="lname" class="field" size="30" /></td>
+        		</tr>
+        		<tr >
+        			<td>Gender :</td>
+        			<td><input type="radio" name="gender" class="field" value="male"/>Male
+        			<input type="radio" name="gender" class="field" value="female"/>Female</td>
+        		</tr>
+        		<tr>
+        			<td>Mobile No.*</td>
+        			<td><input type="text" name="mobileno" class="field" /></td>	
+        		</tr>
+        		<tr>
+        			<td>Date of birth* :</td>
+        			<td><input type="date" name="dob" class="field" size="30" /></td>	
+        		</tr>
+        		<tr>
+        			<td>Email id* :</td>
+        			<td><input type="text" name="email" class="field" size="30" /></td>	
+        		</tr>
+        		<tr>
+        			<td valign="top">Address* :</td>
+        			<td><textarea name="address" class="field" rows="3" cols="30" warp="hard" onfocus="mytextarea(this)">Enter your address</textarea></td>
+        		</tr>
+        		<tr>
+        			<td>Pin code* :</td>
+        			<td><input type="text" name="pincode" class="field" size="30" /></td>
+        		</tr>
+        		<tr>
+        			<td valign="top">Hobbies :</td>
+        			<td><textarea name="hobbies" class="field" rows="3" cols="30" warp="hard" onfocus="mytextarea(this)">Enter your hobbies</textarea></td>
+        		</tr>
+        		<tr>
+        			<td><input type="submit"  value="Submit" /></td>
+        			<td><input type="reset"  value="Reset" /></td>
+        		</tr>
+        		
+        	</table>
+        </form>
+        
+  
+    </body>
+    
+</html>

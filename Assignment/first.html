@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Simple
+        </title>
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+		</script>
+    </head>
+    <body>
+    	<h3>Welcome</h3>
+        <form >	
+       	<table>
+        		<tr>
+        			<td>Name :</td>
+        			<td><input type="text" id="txtname"></td>
+        		</tr>
+        		<tr><td>Password:</td>
+        			<td><input type="text" id="txtpassword"></td>
+        		</tr>
+        		<tr>	
+        			<td><input type='file' onmouseout="readURL(this);" /></td>
+        			<td><img id="photo" src="#" height="200" width="200" alt="your image" /></td>		
+        		</tr>	
+        	</table>
+        	 </form>
+        		<button onclick="creatDb()" >store</button>&nbsp;&nbsp;
+        		<button onclick="showRecord()">Show</button>
+        	<div id="one">
+        		
+        	</div>	
+       	<!--
+        	<input type="text" id="id" />
+        	<button onclick="getImage()">get image</button>
+        	<img id="getphoto" src="#" height="200" width="200" alt="your image" />
+        	-->
+          <script>
+          
+          	var nam=document.getElementById("txtname");
+        	var password=document.getElementById("txtpassword");
+        	var userphoto=document.getElementById("photo");
+        	
+        	var result=document.getElementById("one");
+        	//var mytable=document.getElementById("mydata");
+        	var db = openDatabase('DataBase', '2', 'myfirstdatabase', 2 * 1024 * 1024);
+			function creatDb(){
+				
+				//alert("opendatabase executed");
+				db.transaction(function (tx) {
+ 				 	tx.executeSql('CREATE TABLE IF NOT EXISTS Inform(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, password TEXT,image BLOB)');
+  					//alert("table created");
+  			
+  					tx.executeSql('INSERT INTO Inform(name,password,image) VALUES (?,?,?)',[nam.value,password.value,userphoto.src]);			
+  					alert("data inserted");
+  					
+  					//alert("src :"+userphoto.src);
+					
+					/*
+					  tx.executeSql('SELECT * FROM Inform', [], function (tx, results) {
+																				var len = results.rows.length, i;
+																				var txt="";
+																				for (i = 0; i < len; i++) {
+																					txt=txt+results.rows.item(i).name+" "+results.rows.item(i).password+"<br>";
+																			   }
+																		  result.innerHTML=txt;
+																	 });		 	*/
+						});	
+			}
+			function readURL(input) {
+									if (input.files && input.files[0]) {
+										var reader = new FileReader();
+												  reader.onload = function (e) {
+											$('#photo').attr('src', e.target.result);
+										}
+												  reader.readAsDataURL(input.files[0]);
+									}
+				}	
+				
+		
+		function showRecord () {
+					  db.transaction(function (txx) {
+						  txx.executeSql('SELECT * FROM Inform', [], function (txx, res) {
+												var len = res.rows.length, i;
+												var txt="";
+												for (i = 0; i < len; i++) {
+													txt=txt+res.rows.item(i).name+" "+res.rows.item(i).password+" <img height='200' width='200' src="+res.rows.item(i).image+" /><br>";
+											   }
+										  result.innerHTML=txt;
+								});		
+				});
+			}
+			
+		/*
+			//getting the image from database
+				var userid=document.getElementById("id");
+				var up=document.getElementById("getphoto");
+				
+				function getImage () {
+					 db.transaction(function (txx) {
+							 var mysrc="";
+								  txx.executeSql('SELECT * FROM Inform', [], function (txx, res) {
+														var len = res.rows.length, i;
+														var txt="";
+														for (i = 0; i < len; i++) {
+															mysrc=res.rows.item(i).image;
+													   }
+												  //result.innerHTML=txt;
+										});
+										alert("hello"+mysrc);	
+								//up.src=mysrc;	
+						});
+				
+				}
+				*/
+		
+		
+        </script>
+    </body>
+    
+</html>

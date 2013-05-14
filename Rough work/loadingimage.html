@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            photo uploading
+        </title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+        <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#userphoto').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    </head>
+    
+    <body>
+        
+        <form id="form1" runat="server">
+        	photo :<input type='file' onchange="readURL(this);" />
+        	<img id="userphoto" src="#" width="300" height="400" alt="your image" />
+    	</form>
+    </body>
+    
+</html>

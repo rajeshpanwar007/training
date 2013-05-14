@@ -1,0 +1,19 @@
+#tbl {
+	text-align: left;
+	color: #000066;
+}
+
+input,body {
+	color: #000066;
+}
+
+textarea {
+	color: #000066;
+}
+
+select {
+	color: #000066;
+}
+#mydiv{
+	font-size: 12px
+}

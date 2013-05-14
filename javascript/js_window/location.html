@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            using the location object of window
+        </title>
+    </head>
+    <body>
+    	<h4>window.location : </h4>
+        <script>
+        	document.write("<br>location.href : "+location.href);
+        	document.write("<br>location.pathname :"+location.pathname);
+        	document.write("<br>location.hostname : "+location.hostname);
+        	document.write("<br>location.host : "+location.host);
+        	document.write("<br>location.protocol : "+location.protocol);
+        	document.write("<br>location.prototype : "+location.prototype);
+        	function myfunction () {
+        		window.location.assign("http://www.w3school.com");
+			  
+			}
+        	
+        </script>
+        <br>
+        <button onclick="myfunction()">load new document</button>
+    </body>
+    
+</html>

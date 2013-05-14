@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            using the navigator object of window
+        </title>
+    </head>
+    <body>
+    	
+        <h4> Using the window navigator :</h4>
+        <div id="one"> </div>
+        <script>
+			txt="<p>Browser Code Name "+navigator.appCodeName+"</p>";
+			txt+="<p>Browser Name "+navigator.appCode+"</p>";
+			txt+="<p>Browser Version "+navigator.appVersion+"</p>";
+			txt+="<p>Cookies Enable "+navigator.cookiesEnabled+"</p>";
+			txt+="<p>Platform :"+navigator.platform+"</p>";
+			txt+="<p>User-agent header :"+navigator.userAgent+"</p>";
+			txt+="<p>User-agent Header :"+navigator.systemLanguage+"</p>";
+        	document.getElementById("one").innerHTML=txt;
+;        </script>
+    </body>
+    
+</html>

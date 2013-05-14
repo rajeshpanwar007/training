@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            using script tag
+        </title>
+        <script>
+        	function display () {
+			  	document.write("<h1>hello java scripting !!!!!</h1>")
+            	document.write("<p> here is paragraph using JavaScript</p>")
+			}
+        </script>
+    </head>
+    <body>
+       <p> java script is mainly used for image manupulation, form validation and dynamic changes to content
+       JavaScript can directln write into html output stream
+       
+        </p>
+        <p>
+        	<b>Note : </b>You can only use <strong>document.write</strong> in the HTML output.
+									If you use it after the document has loaded (e.g. in a function), the whole document will be overwritten.
+        </p>
+       	<div>
+       		<button type="button" onclick="display()">write in function</button>
+       	</div>
+    </body>
+    
+</html>

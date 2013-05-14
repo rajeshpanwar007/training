@@ -1,0 +1,19 @@
+p:first-child{
+	background-color:#0000FF;
+}
+P:first-line{
+	color:#008000;
+}
+p:first-letter{
+	color:#FF0000;
+	font-size:xx-large;
+}
+h1:after{
+	content:url('Button.png');
+}
+h1:before{
+	content:url('Button.png');
+}
+input:focus{
+	background-color:pink;
+}

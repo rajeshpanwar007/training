@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>
+			javascript Object Example
+		</title>
+	</head>
+	<body>
+		<script>
+			function person(firstname,lastname,age)
+			{
+				this.firstname=firstname;
+				this.lastname=lastname;
+				this.age=age;
+				
+				this.setName=setName;
+				function setName(name)
+				{
+					this.firstname=name;
+				}	
+			}
+		</script>
+		<h3>creating the object of person </h3>
+		<script>
+			var p1=new person("rajesn","panwar",21);
+			var d=p1.firstname+" "+p1.lastname+" "+p1.age;
+			document.write("person detail is : "+d);
+			p1.setName("raju");
+			document.write("<br>after name change : "+p1.firstname+"<br>");
+			//for each loop 
+			for(x in p1){
+				d=d+p1[x];
+			}
+			document.write("person detail is : "+d);
+		
+		</script>
+	</body>
+</html>

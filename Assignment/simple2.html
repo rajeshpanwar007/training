@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Simple2
+        </title>
+    </head>
+    <body>
+    	<h3>Welcome</h3>
+        	<table>
+        		<tr>
+        			<td>Name :</td>
+        			<td>
+        				<input type="text" id="txtname">
+        			</td>
+        		</tr>
+        		<tr><td>Password:</td>
+        			<td>
+        				<input type="password" " " id="txtpassword">
+        			</td>
+        		</tr>
+        		<tr >
+				<td>Gender :</td>
+				<td>
+				<input type="radio"  name="gender" class="field" value="male"/>
+				Male
+				<input type="radio"  name="gender" class="field" value="female"/>
+				Female</td>
+			</tr>
+        		<tr>
+        			<td>
+        				<button onclick="storeRecord()" >store</button>
+        			</td>
+        			<td>
+        				<button onclick="showRecord()">Show</button>
+        			</td>
+        			<td>
+        				<button onclick="updateRecord()">Update</button>
+        			</td>
+        			
+        		</tr>	
+        	</table>
+        	<div id="one"></div>
+          <script>
+          
+          	var myname=document.getElementById("txtname");
+        	var mypassword=document.getElementById("txtpassword");
+        	var gender="";
+        	var result=document.getElementById("one");
+        	
+        	//database Query
+        	var createtable="CREATE TABLE IF NOT EXISTS hello(id INTEGER PRIMARY KEY AUTOINCREMENT ,name TEXT, password TEXT,gender TEXT)";
+        	var insertstatement="INSERT INTO hello (name, password,gender) VALUES (?,?,?)";
+        	var deletestatement="DELETE FROM hello WHERE id=?";
+        	var updatestatement="UPDATE user SET name=?,password=? WHERE id=?";
+        	//var deletecall="<a href='#' onclick='deleteRecord(?)'>delete</a>"
+        	//var selectstatement=""
+        	var db = openDatabase('Test', '2', 'my first database', 2 * 1024 * 1024);
+        	var dataset;
+        	function test(){
+        		alert(myname.value+" "+mypassword.value);
+        	}
+        	
+        	creatDb();
+   
+               function creatDb(){
+                    db.transaction(function (tx) {
+                      tx.executeSql(createtable);
+                     alert("table created");
+                     });
+                 }
+                 function storeRecord(){
+                 		var radios = document.getElementsByName("gender");
+   					 	for (var i = 0; i < radios.length; i++) {       
+        				if (radios[i].checked) {
+            			gender=radios[i];
+            			break;
+        				}
+    				}
+                         db.transaction(function (txx){
+                           txx.executeSql(insertstatement,[myname.value,mypassword.value,gender.value],blankField,onError);
+                           alert("data stored");
+                        });	
+                      }
+                  function showRecord(){
+                          db.transaction(function (txx){
+                              txx.executeSql('SELECT * FROM hello',[],function(txx,results){
+                                  dataset=results.rows;
+                                  var len=dataset.length,i;
+                                  var divtxt="";
+                                  for(i=0;i<len;i++){
+                                     	divtxt+=dataset.item(i).name+"   "+dataset.item(i).password+" "+dataset.item(i).gender+"  <a href='#' onclick='deleteRecord("+dataset.item(i).id+")'>delete</a>"+"   <a href='#' onclick='loadRecord("+i+")'>edit</a><br>";
+                                  }
+                                  result.innerHTML=divtxt;
+                                 alert("data are showed");
+                              });
+                          });
+                      }
+                      function updateRecord(){
+                      		db.transaction(function(txx){
+                      			txx.executeSql(updatestatement,[myname.value,mypassword.value,id.value])
+                      		});
+                      }
+                      function deleteRecord(i){
+                      	db.transaction(function(txx){
+                      		txx.executeSql(deletestatement,[i],showRecord);
+                      		alert("record deleted");
+                      	});
+                      }
+                      function blankField(){
+                      	//showRecord();
+                      	myname.value="";
+                      	mypassword.value="";
+                      }
+                      function onError(tx, error) {
+        				alert(error.message);
+      					}
+      					function loadRecord(i){
+      						myname.value=dataset.item(i).name;
+      						mypassword.value=dataset.item(i).password;
+      					}
+      
+                                  
+    
+        </script>
+    </body>
+    
+</html>

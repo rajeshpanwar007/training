@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>
+			Query html example
+		</title>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	     <script>
+	     	$(document).ready(function()
+	     	{
+	     		$("#btn1").click(function()
+	     		{
+	     			alert($("#p1").text());
+	     		});
+	     		$("#btn2").click(function(){
+	     			$("#p1").text("iam the new text ");
+	     		});
+	     		$("#btn3").click(function(){
+	     			$("#p1").append("<b>append text</b>");
+	     		});
+	     		$("#btn4").click(function(){
+	     			$("#p1").after("<b>after text </b>");
+	     		});
+	     	});
+	     </script>
+	</head>
+	<body>
+		<h2>Example of query text here</h2>
+		<p id="p1">
+			this is the first paragraph
+		</p>
+		<p id="p2">
+			this is the second paragraph
+		</p>
+		<button id="btn1">get p1</button>
+		<button id="btn2">set p2</button>
+		<button id="btn3">appendtest</button>
+		<button id="btn4">after</button>
+		
+	</body>
+</html>

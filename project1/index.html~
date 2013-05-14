@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title> User Interaction </title>
+		
+		<script src="jquery8.js"></script>
+		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="myscript.js" type="text/javascript" ></script>-->
+		<script src="mycanvas.js" type="text/javascript" ></script>
+		<script src="mydatabase.js" type="text/javascript"></script>
+		<script src="myfileupload.js" type="text/javascript"></script>
+		<script src="myvalidation.js" type="text/javascript"></script>
+		<script src="mycaptcha.js" type="text/javascript"></script>
+		
+		<link rel="stylesheet" href="mystyle.css" type="text/css" />
+		
+	</head>
+	<body onload="db_interaction.createDb()">
+		<h3>User Information :</h3>
+		<form id="myform" >
+			<table>
+				<tr>
+					<td>
+					<table id="tbl">
+						<tr>
+							<td>
+							<input type="hidden" id="id" />
+							</td>
+						</tr>
+						<tr >
+							<td >First Name* :</td>
+							<td>
+							<input  type="text" id="fname" class="field" size="30" autofocus/>
+							</td>
+						</tr>
+						<tr>
+							<td>Fast Name* :</td>
+							<td>
+							<input type="text" id="lname" class="field" size="30" list="surname"/>
+							<datalist id="surname">
+								<option value="Sharma" ><option value="Panwar" ><option value="Yadav" ><option value="Rathee" >
+							</datalist></td>
+						</tr>
+						<tr >
+							<td>Gender* :</td>
+							<td>
+							<input type="radio"  id="gendermale" name="gender" class="field" value="male" />
+							Male
+							<input type="radio"  id="genderfemale" name="gender" class="field" value="female" checked/>
+							Female</td>
+						</tr>
+						<tr>
+							<td>Mobile No.*</td>
+							<td>
+							<input type="number" id="mobileno" class="field" size="30" min="7000000000" max="9999999999"/>
+							</td>
+						</tr>
+						<tr>
+							<td>Date of birth :</td>
+							<td>
+							<input type="date" id="dob" class="field" size="30" min="1950-01-01" max="2000-12-31"/>
+							</td>
+						</tr>
+						<tr>
+							<td>Email id* :</td>
+							<td>
+							<input type="email" id="email" class="field" size="30" />
+							</td>
+						</tr>
+						<tr valign="top">
+							<td>Game :</td>
+							<td>
+							<input type="checkbox" name="game" id="cric" value="cricket"/>
+							Cricket
+							<br>
+							<input type="checkbox" name="game" id="foot" value="football"/>
+							Football
+							<br>
+							<input type="checkbox" name="game" id="bask" value="basketball"/>
+							Basketball
+							<br>
+							<input type="checkbox" name="game" id="hock" value="hockey"/>
+							Hockey
+							<br>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">Address* :</td>
+							<td>							<textarea id="address" class="field" rows="3" cols="30" wrap="hard" onfocus="validation.textAreaVal(this)" placeholder="Enter your Address">Enter your address</textarea></td>
+						</tr>
+						<tr>
+							<td>Pin code* :</td>
+							<td>
+							<input type="text" id="pincode" class="field" size="30" onfocus="fileupload.getPincode()"/>
+							</td>
+							<tr>
+								<td></td>
+								<td>
+									<input type="range" min="100000" max="999999" name="rangeinput" onchange="fileupload.setPincode()"/>
+								</td>
+							</tr>
+							
+						</tr>
+						<tr>
+							<td valign="top">Hobbies :</td>
+							<td>
+							<select name="hobbies" multiple="multiple" size="3" title="Hold ctrl to select multiple hobbies" >
+								<option value="reading">Reading</option>
+								<option value="cricket">Cricket</option>
+								<option value="football">Football</option>
+								<option value="listen">Listen to Songs</option>
+								<option value="watch">Watching Movies</option>
+								<option value="videogame">Video Games</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td>Photo :</td>
+							<td>
+							<input type='file' onmouseout="fileupload.readURL(this);" />
+							</td>
+						</tr>
+						<tr>
+							<td><img id="photo" src="#" height="150" width="150" alt="your image" /></td>
+						</tr>
+						<tr>
+							<td><a href="#" onclick="captcha.loadCaptcha()" ><img src="#" width="120" height="40" name="captchaimg"/></a></td>
+							<td><input type="text" name="captchatext"/></td>
+							
+						</tr>
+
+					</table></td>
+					<!--<td>
+							<h3>Select your faviourte vedio :</h3>
+							<input type='file' onmouseout="fileupload.readVideo(this);" />
+							<br>
+							<video width="300" height="300" id="myvideo" controls autoplay>
+								Your browser does not support the video tag.
+							</video>
+							<br>
+							<canvas id="mycanvas" width="150" height="150" style="border:1px solid #000000;"> </canvas>
+							<br>
+							<span valign="top">color : <input type="color" id="mycolor" /></span>
+							<br>
+							<input type="button" value="save" onclick="fileupload.saveSign()" name="save" />
+							<input type="button" value="clear" onclick="fileupload.resetSign()" name="clear" />
+					</td> -->
+				</tr>
+			</table>
+
+			<input type="button" value="insert" onclick="db_interaction.insertRecord()" name="insert" />
+			<input type="button" value="show" onclick="db_interaction.showRecord()" name="show" />
+			<input type="button" value="update" onclick="db_interaction.updateRecord()" name="update" disabled=true/>
+			<input type="reset" value="reset" onclick="db_interaction.doBlankField()"  />
+		</form>
+
+		<br>
+		<br>
+		<div id="result"></div>
+	</body>
+
+</html>

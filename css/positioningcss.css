@@ -1,0 +1,34 @@
+
+p.fixed{
+    position:fixed;
+    bottom:0px;
+    right:0px;
+    background-color:red;
+}
+p.rel_left{
+    position:relative;
+    left:-30px;
+    background-color:green;
+}
+p.rel_right{
+    position:relative;
+    left:30px;
+    background-color:yellow;
+    
+}
+p.rel_top{
+    position:relative;
+    top:30px;
+    background-color:red;
+}
+h1.ab{
+    position:absolute;
+    left:200px;
+    top:300px;
+}
+img.abs{
+    position:absolute;
+    left:200px;
+    top:300px;
+    z-index: -1;
+}

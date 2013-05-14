@@ -1,0 +1,162 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="/res/bootstrap/css/bootstrap.css"/>
+		<link rel="stylesheet" href="/res/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="/res/bootstrap/css/bootstrap-responsive.css"/>
+		<script type="text/javascript" src ="/res/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="res/connectivity.js"></script>
+		<script src="res/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="res/formfunction.js"></script>
+		<script type="text/javascript" src="res/canvas.js"></script>
+		<script type="text/javascript" src="res/validate.js"></script>
+		<script type="text/javascript" src="res/captcha.js"></script>
+		
+	</head>
+	<body onload="datahandle.loadDB()">
+		<div class="container">
+			<div class="row" align="center">
+				<div class="span12">
+					<h1>Welcome User</h1>					
+					<h3>Please fill the fields given below</h3>
+				</div>
+			</div>
+			<br/>
+			<form class="form-horizontal" name="frminput" id="frminput" onsubmit="return formfunction.submitform()">
+			<div class="row">				
+					<div class="span7">					
+						<fieldset>
+							<div class="control-group">  
+		            			<label class="control-label" for="txtfname">First Name</label>  
+		            			<div class="controls">
+		              				<input type="text" class="input-xlarge" id="txtfname" name="txtfname" required placeholder="First Name">
+		              			</div>
+		              		</div>
+		              		<div class="control-group">  
+		            			<label class="control-label" for="txtlname">Last Name</label>  
+		            			<div class="controls">
+		              				<input type="text" class="input-xlarge" id="txtlname" list="surname" name="txtlname" placeholder="Last Name">
+		              				<datalist id="surname">
+										<option value="Sharma">
+										<option value="Verma">
+										<option value="Kumar">
+										<option value="Panwar">
+										<option value="Singh">
+									</datalist>
+		              			</div>
+		              		</div>
+		              		<div class="control-group">  
+		            			<label class="control-label" for="txtaddress">Address</label>  
+		            			<div class="controls">
+		              				<textarea class="input-xlarge" rows="3" maxlength="100" name="txtaddress" id="txtaddress" name="txtfname" required placeholder="Enter your address"></textarea>
+		              			</div>
+		              		</div>
+		              		<div class="control-group">
+		              			<label class="control-label" for="txtpin">Pin Code</label>
+		              			<div class="controls">
+		              				<input type="text" class="input-xlarge" id="txtpin" name="txtpin" required placeholder="Postal Code" onBlur="formclass.txtpinblur()" onchange="formclass.txtpinchange()"/>
+		              				<input class="input-xlarge" type="range" name="pinpoints" min="110000" max="859999" onchange="formclass.setpin()"/>
+		              			</div>
+		              		</div>
+		              		<div class="control-group">
+		              			<label class="control-label" for="txtmobile">Mobile No.</label>
+		              			<div class="controls">
+		              				<input class="input-xlarge" id="txtmobile" name="txtmobile" required placeholder="Mobile Number" type="text" onchange="formclass.setupdatebtn()" onblur="formclass.txtmobileblur()"/>
+		              			</div>
+		              		</div>
+		              		<div class="control-group">
+		              			<label class="control-label" for="male">Gender</label>
+		              			<div class="controls">
+		              				<input class="input-xlarge" type="radio" id="male" name="gender" value="male" checked="checked" /> Male<br/>
+		              				<input class="input-xlarge" type="radio" id="female" name="gender" value="female" /> Female
+		              			</div>		              			
+		              		</div>
+		              		<div class="control-group">
+		              			<label class="control-label" for="email">Email Id</label>
+		              			<div class="controls">
+		              				<input id="email" required type="email" name="email" class="input-xlarge" onblur="formclass.bluremail(this)" placeholder="E-mail ID" />
+		              			</div>
+		              		</div>
+		              		<div class="control-group">
+		              			<label class="control-label" for="dob">D. O. B</label>
+		              			<div class="controls">
+		              				<input id="dob" required type="date" name="dob" class="input-xlarge" min="1950-12-31" max="2000-12-31" required/>
+		              			</div>
+		              		</div>
+		              		<div class="control-group">
+		              			<label class="control-label" >Sports Played</label>
+		              			<div class="controls">
+		              				<input class ="input-xlarge" type="checkbox" name="chkbox" value="Cricket" />Cricket<br/>
+		              				<input class ="input-xlarge" type="checkbox" name="chkbox" value="Football" />Football<br/>
+		              				<input class ="input-xlarge" type="checkbox" name="chkbox" value="BasketBall" />Basketball<br/>
+		              				<input class ="input-xlarge" type="checkbox" name="chkbox" value="Baseball" />Baseball
+		              			</div>
+		              		</div>
+		              		<div class="control-group">
+		              			<label class="control-label" for="selhobbies">Hobbies</label>
+		              			<div class="controls">
+		              				<select name="selhobbies" multiple="multiple" size="3" title="Hold ctrl to select multiple hobbies"	onBlur="formclass.selhobbiesblur()">
+										<option value="reading">Reading</option>
+										<option value="cricket">Cricket</option>
+										<option value="football">Football</option>
+										<option value="listen">Listen to Songs</option>
+										<option value="watch">Watching Movies</option>
+										<option value="videogame">Video Games</option>
+									</select>
+									<p class="help-block">Hold ctrl to select multiple hobbies(not more than 2)</p>
+		              			</div>
+		              		</div>
+		              		<div class="control-group">
+		              			<label class="control-label" for="file">You Pic.</label>
+		              			<div class="controls">
+		              				<input type="file" id="file" name="file" class="input-file" onmouseout="formclass.loadfile()" />
+		              			</div>
+		              		</div>
+							<div class="control-group">
+		              			<label class="control-label" for="file"><img name="captchaimage" id="captchaimage" height="50" width="100" alt="Re-Captcha" src="#" class="img-rounded"/></label>
+		              			<div class="controls">
+		              				<input type="text" id="txtcaptcha" name="txtcaptcha" class="input-small" required/>
+		              				<p class="help-block">Prove that you are human</p>
+		              			</div>
+		              		</div>
+						</fieldset>					
+				</div>
+				<div class="span5">
+					<h4>Play your fav media files: </h4>
+					<div class="control-group">
+						<input type="file" id="videofile" name="videofile" class="input-file" onchange="formclass.loadvideo()" />
+						<video name="myvideo" id="myvideo" class="input-xlarge" width="300" height="200" controls autoplay> </video>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Signature</label>
+						<div class="controls">
+							<canvas id="mycanvas" width="200" height="200" style="border:1px solid #d3d3d3;"></canvas><br/>
+							<input type="color" class="input-small" id="mycolor">Color	<br/>
+							<input type="button" class="btn btn-success" name="savesign" value="Save" onclick="formclass.savesignfunc()" /> 
+							<input type="button" name="resetsign" class="btn btn-inverse" value="Clear" onclick="formclass.resetsign()" />			
+						</div>
+					</div>					
+					<div class="control-group">
+						<img src="#" height="200" accept="image/*"	width="200" id="image" class="img-rounded" name="image" alt="your pic" />
+					</div>
+				</div>
+				
+			</div>
+			<div class="form-actions">
+		    	<input type="button" Value="&lt;&lt;" class="btn btn-info" name="btnfirst" onclick="datahandle.display(this)" />
+		        <input type="button" Value="&lt;" name="btnpre" class="btn btn-info" onclick="datahandle.display(this)" /> 
+		        <input type="button" Value="&gt;" name="btnnext" class="btn btn-info" onclick="datahandle.display(this)" />
+		        <input type="button" Value="&gt;&gt;" name="btnlast" class="btn btn-info" onclick="datahandle.display(this)" />
+		        <input type="button" name="btnshow" class="btn btn-success" Value="Show Table" onclick="datahandle.display1()" />
+		        <input type="submit" Value="submit" class="btn btn-primary" id="btnsubmit" name="btnsubmit"/>
+		        <input type="reset"	Value="Reset" class="btn btn-inverse" name="btnreset" id="btnreset" onClick="formclass.resetit()" />
+		    </div>
+		    </form>
+		    <div class="row">
+		    	<div class="span12" id="mydiv">
+		    	</div>
+		    </div>
+		</div>
+		
+		
+	</body>
+</html>

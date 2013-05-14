@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            creating validation for form of html
+        </title>
+        <script type="text/javascript">
+        	function validation() {
+			  	var name=document.forms["myform"]["fname"].value;
+        		if(name==""||name==null){
+        				alert("pls enter the name");
+        				return false;
+        		}				
+				var id=document.forms["myform"]["email"].value;
+				var atpos=id.indexOf("@");
+				var dotpos=id.lastIndexOf(".");
+				if(atpos<1 ||dotpos<atpos+2||dotpos+2>=id.length)
+				{
+					alert(id);
+					return false;
+				}	
+		}        	
+        </script>
+    </head>
+    
+    <body>
+    	
+        <H2>Enter the name and Email.id </h2>
+        <form name="myform" action="validation.asp" method="get" onsubmit="return validation()">
+        	Name :<input type="text" name="fname" ><br>
+        	Email id:<input type="text" name="email" ><br>
+        	<input type="submit" value="submit" >
+        </form> 
+        
+    </body>
+    
+</html>

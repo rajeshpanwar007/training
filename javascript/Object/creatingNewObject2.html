@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            using the object Constructor
+        </title>
+    </head>
+    <body>
+        <script>
+        	function person(fname,lname,age)
+        	{
+        		this.fname=fname;
+        		this.lname=lname;
+        		this.age=age;
+        	}
+        	myfather= new person("Azad","singh",62);
+        	mymother=new person("phool","wati",59);
+        	document.write(myfather.fname+" is "+myfather.age+" years old<br>");
+        	document.write(mymother.fname+" is "+mymother.age+ " years old");
+        </script>
+    </body>
+    
+</html>

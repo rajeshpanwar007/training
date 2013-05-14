@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>form elements example</title>
+		<script src="js/jquery8.js"></script>
+		<script type="text/javascript"  src="js/bootstrap.js"></script>
+		<link type="text/css" href="css/bootstrap.css" rel="stylesheet">
+	</head>
+	<body>
+		<h2>First..............</h2>
+		<form>
+			<fieldset>
+				<legend>
+					Form Elements
+				</legend>
+				<label>First name :</label>
+				<input type="text" placeholder="first name..."/>
+				<span class="help-inline">write first name here</span>
+
+				<label class="checkbox">
+					<input type="checkbox">
+					check me out </label>
+				<label class="checkbox">
+					<input type="checkbox" value="">
+					Option one is this and that—be sure to include why it's great </label>
+
+				<label class="radio">
+					<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+					Option one is this and that—be sure to include why it's great </label>
+				<label class="radio">
+					<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+					Option two can be something else and selecting it will deselect option one </label>
+				<div class="controls">
+					<input class="span5" type="text" placeholder=".span5">
+				</div>
+				<div class="controls controls-row">
+					<input class="span4" type="text" placeholder=".span4">
+					<input class="span1" type="text" placeholder=".span1">
+				</div>
+				<input type="text" class="input-medium search-query ">
+				<button type="submit" class="btn ">
+					Search
+				</button>
+				<br>
+				<br>
+				<button type="button" class="btn btn-primary ">
+					submit data
+				</button>
+			</fieldset>
+		</form>
+		<h2>second</h2>
+		<form class="form-inline">
+			<input type="text" class="input-small" placeholder="Email">
+			<input type="password" class="input-small" placeholder="Password">
+			<label class="checkbox">
+				<input type="checkbox">
+				Remember me </label>
+			<button type="submit" class="btn">
+				Sign in
+			</button>
+			<!--<div class="input-append">
+			<input class="span2" id="appendedDropdownButton" type="text">
+			<div class="btn-group">
+			<button class="btn dropdown-toggle" data-toggle="dropdown">
+			Action
+			<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+			<li>
+			<a href="#">Action</a>
+			</li>
+			<li>
+			<a href="#">Another action</a>
+			</li>
+			<li>
+			<a href="#">Something else here</a>
+			</li>
+			</ul>
+			</div>
+			</div>
+			-->
+			<div class="input-append">
+				<a class="btn btn-primary" href="#"><i class="icon-user icon-white"> </i> User</a>
+				<div class="btn-group">
+					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#"><i class="icon-pencil"> </i> Edit</a>
+						</li>
+						<li>
+							<a href="#"><i class="icon-trash"> </i> Delete</a>
+						</li>
+						<li>
+							<a href="#"><i class="icon-ban-circle"> </i> Ban</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#"><i class="i"> </i> Make admin</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</form>
+		<h2>third......</h2>
+		<form class="form-horizontal">
+			<div class="control-group warning inline">
+				<label class="control-label" for="inputWarning">Input with warning</label>
+				<div class="controls">
+					<input type="text" id="inputWarning">
+					<span class="help-inline">Something may have gone wrong</span>
+				</div>
+			</div>
+			<div class="control-group error">
+				<label class="control-label" for="inputError">Input with error</label>
+				<div class="controls">
+					<input type="text" id="inputError">
+					<span class="help-inline">Please correct the error</span>
+				</div>
+			</div>
+			<div class="control-group success">
+				<label class="control-label" for="inputSuccess">Input with success</label>
+				<div class="controls">
+					<input type="text" id="inputSuccess">
+					<span class="help-inline">Woohoo!</span>
+				</div>
+			</div>
+			<p>
+				<div>
+					<img src="../image/one.jpg" class="img-rounded" width="200px" height="200px" />
+					<img src="../image/three.jpg" class="img-circle" width="200px" height="200px" />
+					<img src="../image/two.jpg" class="img-polaroid" width="200px" height="200px" />
+				</div>
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<a class="btn" href="#"> <i class="icon-align-left"> </i></a>
+						<a class="btn" href="#"><i class="icon-align-center"> </i></a>
+						<a class="btn" href="#"><i class="icon-align-right"> </i></a>
+						<a class="btn" href="#"><i class="icon-align-justify"> </i></a>
+					</div>
+				</div>
+
+			</p>
+			<div class="span3">
+				<button class="btn btn-large btn-block btn-primary" type="button">
+					Block level button
+				</button>
+				<button class="btn btn-large btn-block" type="button">
+					Block level button
+				</button>
+			</div>
+		</form>
+	</body>
+</html>

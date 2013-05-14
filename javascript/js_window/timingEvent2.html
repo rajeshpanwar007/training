@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            using the time event
+        </title>
+        <script>
+        var timer;
+        	function startTimer(){
+        		var d=new Date();
+        		var t=d.toLocaleTimeString();
+        		document.getElementById("one").innerHTML=t;
+        		timer=setTimeout(function(){startTimer()},500);
+        	}
+        	function stopTimer(){
+        		clearTimeout(timer);
+        	}
+        </script>
+    </head>
+    <body>
+        <h4>timer using the setTimeout :</h4>
+        <br>
+        <button onclick="startTimer()">Start</button>
+        <button onclick="stopTimer()">Stop</button>
+        <br>
+        <br>
+        <div id="one"> </div>
+    </body>
+    
+</html>

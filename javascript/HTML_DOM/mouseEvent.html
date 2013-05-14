@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Mouse Event Example
+        </title>
+        <script>
+        	function mOver (obj) {
+			  obj.innerHTML="thank you";
+			}
+			function mout(obj){
+				obj.innerHTML="mouse over me";
+			}
+			function mDown (obj) {
+				obj.innerHTML="release mouse";
+				obj.style.backgroundColor="#00ff00";
+			}
+			function mUp (obj) {
+			  obj.innerHTML="press mouse!!";
+			  obj.style.backgroundColor="#ff0000";
+			}
+        </script>
+    </head>
+    <body>
+        <div onmouseover="mOver(this)" onmouseout="mout(this)" style="background-color:#ff0000;width:120px;height:40px;padding:40px;">
+        	mouse over me
+        </div>
+        <br>
+        <br>
+        <div onmousedown="mDown(this)" onmouseup="mUp(this)" style="background-color:#ff0000;width:120px;height:40px;padding:40px;">
+        	press mouse!!!!
+        </div>
+    </body>
+    
+</html>

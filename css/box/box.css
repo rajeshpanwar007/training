@@ -1,0 +1,19 @@
+h1.head1{
+    width:250px;
+    padding:10px;
+    border:20px solid red;
+    margin:10px;
+    outline:green dotted thick;
+}
+h1.head2{
+    width:250px;
+    padding:20px;
+    border:20px solid red;
+    margin:10px;
+}
+h1.head3{
+    width:250px;
+    padding:30px;
+    border:20px solid red;
+    margin:10px;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>
+			Creating the transparent image
+		</title>
+		<style>
+			img.one{
+				opacity: 0.4;
+				filter:alpha(opacity=40);
+			}
+			.one:hover{
+				opacity:1;
+				filter:alpha(opacity=100);
+			}
+			div.background{
+				width:500px;
+				height:250px;
+				background:url("../image gallery/one.jpg") repeat;
+				border: 3px solid black;
+			}
+			div.transbox{
+				width:400px;
+				height:200px;
+				margin:30px 50px;
+				background-color:#ffffff;
+				border:1px solid black;
+				opacity:0.6;
+				filter:alpha(opacity=60);	
+			}
+			.transbox p{
+				margin:30px 40px;
+				font-weight:bold;
+				color:#000000;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>
+			Managing the transpanecny of image
+		</h1>
+		<img class="one" src="../image gallery/one.jpg" width="300px" height="300px" />
+		<img  src="../image gallery/one.jpg" width="300px" height="300px" />
+		<div class="background">
+			<div class="transbox">
+				<p>this is the text in the transbox in the background box
+					this is the text in the transbox in the background box
+					this is the text in the transbox in the background box
+					this is the text in the transbox in the background box
+					this is the text in the transbox in the background box
+					</p>
+			</div>
+		</div>
+	</body>
+</html>

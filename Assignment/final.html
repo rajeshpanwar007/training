@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title> User Information </title>
+		<link rel="stylesheet" href="final.css" type="text/css" />
+	</head>
+	<body>
+		<h3>User Information :</h3>
+		<form action="">
+		<table>
+			<tr>
+				<td>
+				<input type="hidden" id="id" />
+				</td>
+			</tr>
+			<tr >
+				<td >First Name* :</td>
+				<td>
+				<input  type="text" id="fname" class="field" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td>Fast Name* :</td>
+				<td>
+				<input type="text" id="lname" class="field" size="30" />
+				</td>
+			</tr>
+			<tr >
+				<td>Gender* :</td>
+				<td>
+				<input type="radio"  id="gendermale" name="gender" class="field" value="male" />
+				Male
+				<input type="radio"  id="genderfemale" name="gender" class="field" value="female" checked/>
+				Female</td>
+			</tr>
+			<tr>
+				<td>Mobile No.*</td>
+				<td>
+				<input type="text" id="mobileno" class="field" />
+				</td>
+			</tr>
+			<tr>
+				<td>Date of birth* :</td>
+				<td>
+				<input type="date" id="dob" class="field" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td>Email id* :</td>
+				<td>
+				<input type="text" id="email" class="field" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Address* :</td>
+				<td>				<textarea id="address" class="field" rows="3" cols="30" warp="hard" onfocus="mytextarea(this)">Enter your address</textarea></td>
+			</tr>
+			<tr>
+				<td>Pin code* :</td>
+				<td>
+				<input type="text" id="pincode" class="field" size="30" />
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Hobbies :</td>
+				<td>				<textarea id="hobbies" class="field" rows="3" cols="30" warp="hard" onfocus="mytextarea(this)">Enter your hobbies</textarea></td>
+			</tr>
+	<!--
+			<tr>
+				<td>
+				<button onclick="storeRecord()">
+					insert
+				</button></td>
+				<td>
+				<button onclick="showRecord()">
+					show
+				</button></td>
+				<td>
+				<button onclick="updateRecord()">
+					update
+				</button></td>
+				<td>
+				<button onclick="test()">
+					test
+				</button></td>
+			</tr>
+	-->
+	</table>
+	</form>
+	<div>
+		<button onclick="storeRecord()">
+					insert
+				</button>
+				<button onclick="showRecord()">
+					show
+				</button>
+				<button onclick="updateRecord()">
+					update
+				</button>
+				<button onclick="showAllRecord()">
+					show complete record
+				</button>
+			</div>
+		
+		<div id="mydiv"> </div>
+		<script>
+		//get element id......
+			var id = document.getElementById("id");
+			var fname = document.getElementById("fname");
+			var lname = document.getElementById("lname");
+			var gender ="";
+			var mobileno = document.getElementById("mobileno");
+			var dob = document.getElementById("dob");
+			var email = document.getElementById("email");
+			var address = document.getElementById("address");
+			var pincode = document.getElementById("pincode");
+			var hobbies = document.getElementById("hobbies");
+			
+			var div=document.getElementById("mydiv");
+			
+			/*
+			function test() {
+				alert(hobbies.value);
+				alert(fname.value+" "+lname.value+"<br>"+gender.value+" "+mobileno.value+"<br> "+dob.value+" "+email.value+"<br> "+address.value+""+pincode.value+"<br> "+hobbies.value);
+			}
+			*/
+
+			//database related issue and statement
+			var createtable = "CREATE TABLE IF NOT EXISTS user(id INTEGER PRIMARY KEY AUTOINCREMENT ,fname TEXT, lname TEXT,gender TEXT,mobileno INTEGER,dob TEXT,email TEXT,address TEXT,pincode INTEGER,hobbies TEXT)";
+			var insert="INSERT INTO user(fname,lname,gender,mobileno,dob,email,address,pincode,hobbies) VALUES(?,?,?,?,?,?,?,?,?)";
+			var deletestatement="DELETE FROM user WHERE id=?";
+			var updatestatement="UPDATE user SET fname=?,lname=?,gender=?,mobileno=?,dob=?,email=?,address=?,pincode=?,hobbies=? WHERE id=?";
+			
+			var db=openDatabase("information","2","my first use",6*1024*1024);
+			var dataset;
+			creatDb();
+			
+			function creatDb(){
+				db.transaction(function(txx){
+					txx.executeSql(createtable);
+					alert("table created");
+				});
+			}
+			
+			function storeRecord() {
+				if(validateForm()){
+					var radios = document.getElementsByName("gender");
+   					for (var i = 0; i < radios.length; i++) {       
+        			if (radios[i].checked) {
+            			gender=radios[i];
+            			break;
+        				}
+    				}
+    			//alert(gender.value);
+			  		db.transaction(function(txx){
+			  		txx.executeSql(insert,[fname.value,lname.value,gender.value,mobileno.value,dob.value,email.value,address.value,pincode.value,hobbies.value],blankField);
+			  		alert("data inserted");
+			  		});
+				}
+			}
+			function showRecord(){
+				db.transaction(function(txx){
+					txx.executeSql("SELECT * FROM user",[],function(txx,results){
+					dataset=results.rows;
+					var len=dataset.length,i;
+                    var data="";
+                    for(i=0;i<len;i++){
+                            data+=dataset.item(i).fname+"   "+dataset.item(i).lname+" "+dataset.item(i).mobileno+"  <a href='#' onclick='deleteRecord("+dataset.item(i).id+")'>delete</a>"+"   <a href='#' onclick='loadRecord("+i+")'>edit</a><br>";
+                          }
+                     div.innerHTML=data;
+					});
+				});
+				blankField();
+			}
+			function deleteRecord (id) {
+			  	db.transaction(function(txx){
+			  		txx.executeSql(deletestatement,[id],showRecord);
+			  		alert("Record deleted successfully");
+			  	});
+			}
+			function loadRecord(i){
+				id.value=dataset.item(i).id;
+				fname.value=dataset.item(i).fname;
+				lname.value=dataset.item(i).lname;
+				if(dataset.item(i).gender=="male"){
+					document.getElementById("gendermale").checked=true;
+				}
+				else
+				{
+					document.getElementById("genderfemale").checked=true;
+				}
+				mobileno.value=dataset.item(i).mobileno;
+				dob.value=dataset.item(i).dob;
+				email.value=dataset.item(i).email;
+				address.value=dataset.item(i).address;
+				pincode.value=dataset.item(i).pincode;
+				hobbies.value=dataset.item(i).hobbies;
+				alert("record loaded successfully");
+			}
+			function blankField(){
+				id.value="";
+				fname.value="";
+				lname.value="";
+				gender.value="";
+				mobileno.value="";
+				dob.value="";
+				email.value="";
+				address.value="";
+				pincode.value="";
+				hobbies.value="";
+			}
+			function updateRecord(){
+				var radios = document.getElementsByName("gender");
+   				for (var i = 0; i < radios.length; i++) {       
+        		if (radios[i].checked) {
+            		gender=radios[i];
+            		break;
+        			}
+    			}
+    			//alert("update :"+gender.value);
+				db.transaction(function(txx){
+					txx.executeSql(updatestatement,[fname.value,lname.value,gender.value,mobileno.value,dob.value,email.value,address.value,pincode.value,hobbies.value,id.value],showRecord);
+					alert("record updated successfully");
+				});
+				//blankField();
+			}
+			
+			function mytextarea (x) {
+        			var str=x.innerHTML;
+        			var patt=/Enter your/gi;
+        			if(patt.test(str)){
+        				x.innerHTML="";
+        			}
+				}
+
+		function validateForm() {
+	  		var x=fname.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the First name");
+			  	return false;
+			  }	
+			  var x=lname.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the last name");
+			  	return false;
+			  }	
+			  var x=mobileno.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the Mobile Number");
+			  	return false;
+			  }	
+			  if(isNaN(x)||x>9999999999||x<7777777777){
+			  	alert("pls enter the valid mobile number \n it should be 10 digits number");
+			  	return false;	
+			  }	
+			  var x=email.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the email id ");
+			  	return false;
+			  }		
+			  	var atpos=x.indexOf("@");
+				var dotpos=x.lastIndexOf(".");
+				if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+  				{
+  						alert("Not a valid e-mail address");
+ 					 	return false;
+  					}  
+			  var x=address.value;
+			  if(x==""||x==null||x=="Enter your address"){
+			  	alert("pls fill the address ");
+			  	return false;
+			  }	
+			  
+			  var x=pincode.value;
+			  if(x==""||x==null){
+			  	alert("pls fill the pincode ");
+			  	return false;
+			  }	 
+			  if(isNaN(x)||x<0||x>999999)		{
+			  	alert("pls enter the valid pincode");
+			  	return false;
+			  }		
+			  return true;			  
+		}
+			
+			function showAllRecord(){
+				//alert("show all record started");
+				db.transaction(function(txx){
+					txx.executeSql("SELECT * FROM user",[],function(txx,results){
+						var dataset=results.rows;
+						document.write("<table border='2px'><th>First Name</th><th>Last Name</th><th>Gender</th><th>Mobile No.</th><th>Date of Birth</th><th>Email id</th><th>Address</th><th>pincode</th><th>hobbies</th>");
+						for(var i=0;i<dataset.length;i++){
+							document.write("<tr>");
+							document.write("<td>"+dataset.item(i).fname+"</td>");
+							document.write("<td>"+dataset.item(i).lname+"</td>");
+							document.write("<td>"+dataset.item(i).gender+"</td>");
+							document.write("<td>"+dataset.item(i).mobileno+"</td>");
+							document.write("<td>"+dataset.item(i).dob+"</td>");
+							document.write("<td>"+dataset.item(i).email+"</td>");
+							document.write("<td>"+dataset.item(i).address+"</td>");
+							document.write("<td>"+dataset.item(i).pincode+"</td>");
+							document.write("<td>"+dataset.item(i).hobbies+"</td>");
+						}
+						document.write("</table>");
+					});
+				});
+			}
+			
+			
+			
+		</script>
+	</body>
+
+</html>

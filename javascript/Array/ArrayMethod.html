@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            creating the method for array
+        </title>
+       <!--
+       	<script src="aa.js" type="text/javascript"></script>
+       -->
+       <script>
+       	function myfunction () {
+			var fruits = ["apple","orange","banana","papaya","peach","guava"];
+			fruits.ucase();
+			document.getElementById("txt").innerHTML=fruits;
+		}
+			Array.prototype.ucase = function() {
+  			for(i=0;i<this.length;i++){
+  			this[i]=this[i].toUpperCase();
+  		}
+	}
+       </script>
+    </head>
+    <body>
+        <p>creating the new fruits array ,calling the ucase method ,displaying the array</p>
+        <button onclick="myfunction()">click me</button>
+        <div id="txt"></div>
+    </body>
+    
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Creating data type
+        </title>
+        <script>
+        	function datatype () {
+        		var a="this is the good 'habit' ";
+        		var b ='this is the good "habit"';
+/*
+        		var cars=new Array();
+        		cars[0]="valve";
+        		cars[1]="suzuki";
+        		cars[2]="BMW";*/
+			//var cars=new Array("valve","suzuke","BMW");
+			var cars=["valve","suzuke","BMWwww"];
+        		
+        		
+        		// var person={firstname:"rajesh",lastname:"panwar",id:2222};
+				 person=new Object();
+          		person.firstname="panwar";
+          		person.lastname="rajesh";
+          		person.id="55533";
+          		
+        		document.writeln("value of cars[2] :"+cars[2]);
+        		document.write("<br>value of person.firstname:"+person.firstname);
+        		document.write("<br>value of person lastname: "+person["lastname"]);
+			  r
+			}
+        </script>
+    </head>
+    <body>
+        <button type="button" onclick="datatype()">try me</button>
+    </body>
+    
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            getting the element of html page
+        </title>
+    </head>
+    <body>
+        <h1>Getting the elements by the getElementsByTagName</h1>
+        <div id="main">
+        	<p>this is the first paragraph inside the div tag</p>
+        	<p>this is the second paragraph inside the div tag</p>
+        </div>
+        <script>
+        	var x=document.getElementById("main");
+        	var y=x.getElementsByTagName("p");
+        	document.write("The content of the first paragraph is :"+y[0].innerHTML);
+        	document.write("<br>The content of the second paragraph is :"+y[1].innerHTML);
+        </script>
+        
+    </body>
+    
+</html>

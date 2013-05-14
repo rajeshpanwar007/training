@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            creating the popup box
+        </title>
+        <script>
+        	function myfunction () {
+			  alert("this is the alert box");
+			}
+			
+			function myfunction1(){
+			var x;
+			var r=confirm("Press a button..");
+			if(r==true){
+				x="you pressed the ok!!!!";
+			}	
+			else 
+			{
+				x="you pressed the cancel";
+			}	
+			document.getElementById("one").innerHTML=x;
+		}
+		function myfunction2(){
+			var x=prompt("Enter your name");
+			var r="";
+			if(x!=""&&x!=null){
+				r="Hello "+x;
+				alert(r);
+			}
+			document.getElementById("two").innerHTML=r;
+		}
+			
+        </script>
+    </head>
+    <body>
+    	<h3>using the pop-up button :</h3>
+    	<br>
+    	<button onclick="myfunction()">alert box</button>
+    	<br>
+    	<button onclick="myfunction1()">confirm box</button>
+    	<br>
+    	<div id="one">See the Result</div>
+    	<br>
+    	<button onclick="myfunction2()">prompt box</button>
+    	<br>
+    	<div id="two"></div>
+    	
+    	
+        
+    </body>
+    
+</html>

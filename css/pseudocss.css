@@ -1,0 +1,9 @@
+h1.one{
+    color:red;
+}
+.one:hover{
+    color:green;
+}
+P:first-child{
+    color:#0000FF;
+}

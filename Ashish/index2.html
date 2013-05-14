@@ -1,0 +1,804 @@
+<!DOCTYPE Html>
+<html lang="en">
+<head>
+	<style type="text/css">
+	#tbl
+	{
+		text-align:left;
+		color:#000066;
+	}
+	input,body
+	{
+		color:#000066;
+	}
+	textarea
+	{
+		color:#000066;
+	}
+	select
+	{
+		color:#000066;
+	}
+	</style>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	function loadfunc()
+	{
+		var shortName = 'mydb';
+  		var version = '3';
+  		var displayName = 'user info';
+  		var maxSize = 85536;
+  		db = openDatabase(shortName, version, displayName, maxSize);
+  		setupdatebtn();
+	}
+	function display1()
+	{
+				
+		
+		getrow();
+		var mrow = sessionStorage.mrow;
+        mrow--;
+        mrow++;
+        
+        var str = "";
+        	str = str + "<html><body><table border=1>";
+            str = str +"<tr>";
+        	try{
+                if(window.openDatabase)
+                {
+                	db.transaction(function(tx) {
+                		   tx.executeSql("SELECT * FROM peopleinfo", [],
+                		      function(tx, result) {
+                 		      
+                			   str = "<html><body><table border=1px>";
+                			   str = str + "<tr><th>First Name</th><th>Last Name</th>";
+                			   str = str + "<th>Address</th><th>Pin</th><th>Mobile(Primary Key)</th>";
+                			   str = str + "<th>Gender</th><th>DOB</th><th>Hobby 1</th><th>Hobby 2</th>";
+                			   str = str + "<th>Email</th><th>Cricket</th><th>Football</th><th>BasketBall</th>";
+                			   str = str + "<th>BaseBall</th><th>Image</th></tr>";
+                			   for(row=0;row<=mrow;row++)
+                			   {
+                 		      	str = str + "<tr><td style='cursor: pointer;'>";
+                 		      	str = str +result.rows.item(row)["fname"];
+                 		      	str = str +"</td>";
+                 		      	str = str +"<td>";
+                 		      	str = str +result.rows.item(row)["lname"];
+                 		      	str = str +"</td>";
+                 		      	str = str +"<td>";
+                		         str = str +result.rows.item(row)["address"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["pin"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["mobile"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["gender"];
+                		         str = str +"</td>";                		        
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["dob"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["hobby1"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["hobby2"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["email"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["cricket"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["football"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["basketball"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         str = str +result.rows.item(row)["baseball"];
+                		         str = str +"</td>";
+                		         str = str +"<td>";
+                		         var image = result.rows.item(row)["image"];
+                		         //var blob = new Blob([image], { type: "image/png" });
+                		         str = str +"<img height=50 width=50 src="+image+"/>";
+                		         str = str +"</td>";
+                		         str = str +"</tr>";
+                			   }
+                			   
+                		        
+                		        
+                		        str = str +"</table></body></html>";
+                		        document.getElementById("mydiv").innerHTML=str;
+                		         
+                		      },
+                		      function(tx, error){
+                		         // error occured
+                		      }
+                		   );
+                		});
+    			}
+                }
+                
+            catch(e)
+            {
+                alert(e);
+            }
+            
+	}
+	
+	function display(x)
+	{
+		frminput.txtmobile.disabled = true;		
+		if(x.name == "btnfirst")
+		{
+			sessionStorage.row = 0;
+			row = 0;
+		}
+		else if(x.name == "btnlast")
+		{
+			getrow();
+			row = sessionStorage.mrow;
+			sessionStorage.row = row;			
+			row = ++row
+			row = --row;
+			
+		}
+		else if(x.name == "btnpre")
+		{
+			row = sessionStorage.row;
+			if(row == 0)
+			{
+				getrow();
+				row = sessionStorage.mrow;
+				sessionStorage.row = row;
+				row++;
+				row--;
+			}
+			else
+			{
+				row--;
+				sessionStorage.row = row;
+			}
+		}
+		else if(x.name == "btnnext")
+			{
+				row = sessionStorage.row;
+				getrow();
+				mrow = sessionStorage.mrow;
+				if(row == mrow)
+				{
+					row = 0;
+					sessionStorage.row = 0;
+				}
+				else
+				{
+					row++;
+					sessionStorage.row = row;
+				}
+			}
+		
+		try{
+            if(window.openDatabase)
+            {
+            	db.transaction(function(tx) {
+            		   tx.executeSql("SELECT * FROM peopleinfo", [],
+            		      function(tx, result) {
+             		      	var f = document.frminput;
+            		         f.txtfname.value = result.rows.item(row)["fname"];
+            		         f.txtlname.value = result.rows.item(row)["lname"];
+            		         f.txtaddress.value = result.rows.item(row)["address"];
+            		         f.txtpin.value = result.rows.item(row)["pin"];
+            		         f.txtmobile.value = result.rows.item(row)["mobile"];
+            		         var g = result.rows.item(row)["gender"];
+            		         if(g == "m")
+            		         {
+                		         var m = document.getElementById("male");
+                		         m.checked = true;
+            		         }
+            		         else
+            		         {
+            		        	 var fe = document.getElementById("female");
+                		         fe.checked = true;
+            		         }
+            		         f.dob.value = result.rows.item(row)["dob"];
+            		         f.email.value = result.rows.item(row)["email"];
+            		         var h1 = result.rows.item(row)["hobby1"];
+            		         var h2 = result.rows.item(row)["hobby2"];
+            		         var image="#";
+            		         image = result.rows.item(row)["image"];            		         
+            		         f.image.src = image;
+            		         for(i=0;i<6;i++)
+            		         {
+                		         f.selhobbies.options[i].selected = false;
+            		         }
+            		         for(i = 0; i<6;i++)
+            		         {
+                		         if(f.selhobbies.options[i].text == h1)
+                		         {
+                    		         f.selhobbies.options[i].selected = true;
+                		         }
+                		         else if(f.selhobbies.options[i].text == h2)
+                		         {
+                    		         f.selhobbies.options[i].selected = true;
+                		         }
+            		         }
+            		         for(i = 0;i<4;i++)
+            		         {
+                		         f.chkbox[i].checked = false;
+            		         }
+            		         if(result.rows.item(row)["cricket"] == "true")
+            		         {
+            		         	f.chkbox[0].checked = true;
+            		         }
+            		         if(result.rows.item(row)["football"] == "true")
+            		         {
+            		         	f.chkbox[1].checked = true;
+            		         }
+            		         if(result.rows.item(row)["basketball"] == "true")
+            		         {
+            		         	f.chkbox[2].checked = true;
+            		         }
+            		         if(result.rows.item(row)["baseball"] == "true")
+            		         {
+            		         	f.chkbox[3].checked = true;
+            		         }
+            		      },
+            		      function(tx, error){
+            		         // error occured
+            		      }
+            		   );
+            		});
+			}
+			setupdatebtn();
+            }
+            
+        catch(e)
+        {
+            alert(e);
+        }
+	}
+	function validateEmail(y)
+	{
+	var x=y.value;
+	var atpos=x.indexOf("@");
+	var dotpos=x.lastIndexOf(".");
+	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+	  {
+	  return false;
+	  }
+	else
+	{ return true;}
+	}
+	
+function savedata()
+		{
+			
+			try{
+	            	if(window.openDatabase)
+	              	{
+	              		var shortName = 'mydb';
+	              		var version = '3';
+	              		var displayName = 'user info';
+	              		var maxSize = 65536;
+	              		db = openDatabase(shortName, version, displayName, maxSize);
+	              		/*var sql = 'drop table peopleinfo';
+	              		executeQuery(sql);*/
+	              		var sql = 'CREATE TABLE if not exists peopleinfo(fname text,lname text,address text,pin integer,mobile text primary key,gender text,dob numeric,email text,cricket text, football text, basketball text,baseball text,hobby1 text,hobby2 text,image blob)';
+						console.log(sql);
+	              		/*db.transaction(
+		           		         function(transaction){
+		           		         transaction.executeSql(sql,[],function(transaction,result){alert("hello2")},function(transaction,result){alert("hello1")})
+		           		         });*/
+		           		executeQuery(sql);
+	                    var x = document.getElementById("frminput");
+	        			var g = "0";
+	        			if(document.getElementById("male").checked == true)
+	        			{
+	        				g = "m";
+	        			}
+	        			else if(document.getElementById("female").checked == true)
+	        			{
+	        				g = "f";
+	        			}
+	        			var h = new Array();
+	        			var j = 0;
+	        			for(i = 0;i< 6;i++)
+	        			{
+	        				if(x.selhobbies.options[i].selected)
+	        				{
+	        					h[j] = x.selhobbies.options[i].text;
+	        					j++;
+	        				}
+	        			}
+	        			var play = new Array();
+	        			j=0;
+	        			for(i = 0;i<4;i++, j++)
+	        			{
+		        			if(x.chkbox[i].checked)
+		        			{
+			        			play[j] = true;
+		        			}
+		        			else
+		        			{
+			        			play[j] = false;
+		        			}
+	        			}
+	        			
+	        			var input = document.getElementById("file");
+	        			var i = document.getElementById("image");
+						var imgurl = i.src;
+						//var blob = new Blob([imgurl], { type: "text/plain" });
+						imgurl = imgurl.substring(0, imgurl.length - 2)
+
+	                    sql = 'insert into peopleinfo VALUES ("'+x.txtfname.value+'","'+x.txtlname.value+'","'+x.txtaddress.value+'",'+x.txtpin.value+','+x.txtmobile.value+',"'+g+'","'+x.dob.value+'","'+x.email.value+'","'+play[0]+'","'+play[1]+'","'+play[2]+'","'+play[3]+'","'+h[0]+'","'+h[1]+'","'+imgurl+'")';
+						console.log(sql);
+	                    
+          		        executeQuery(sql,function(results){});
+          		        resetit();
+          		         
+	        		}
+	    	              
+	     		}catch(e)
+	     		{
+	                 alert("Mobile number must be different");
+	            }
+			
+		}
+
+		function resetit()
+		{
+			frminput.txtmobile.disabled = false;
+			setupdatebtn();
+			frminput.image.src = "#";
+			frminput.reset();
+			var d = document.getElementById("mydiv");
+			d.innerHTML = "";
+		}
+
+		function updateit()
+		{
+			try{
+            	if(window.openDatabase)
+              	{
+              		var shortName = 'mydb';
+              		var version = '3';
+              		var displayName = 'user info';
+              		var maxSize = 65536;
+              		db = openDatabase(shortName, version, displayName, maxSize);
+              		/*var sql = 'drop table peopleinfo';
+              		executeQuery(sql);*/
+              		var x = document.getElementById("frminput");
+              		var sql = 'delete from peopleinfo where mobile = '+x.txtmobile.value;
+					console.log(sql);
+              		/*db.transaction(
+	           		         function(transaction){
+	           		         transaction.executeSql(sql,[],function(transaction,result){alert("hello2")},function(transaction,result){alert("hello1")})
+	           		         });*/
+	           		executeQuery(sql);
+	           		var h = new Array();
+	           		var g = "0";
+        			if(document.getElementById("male").checked == true)
+        			{
+        				g = "m";
+        			}
+        			else if(document.getElementById("female").checked == true)
+        			{
+        				g = "f";
+        			}
+        			var h = new Array();
+        			var j = 0;
+        			for(i = 0;i< 6;i++)
+        			{
+        				if(x.selhobbies.options[i].selected)
+        				{
+        					h[j] = x.selhobbies.options[i].text;
+        					j++;
+        				}
+        			}
+        			var play = new Array();
+        			j=0;
+        			for(i = 0;i<4;i++, j++)
+        			{
+	        			if(x.chkbox[i].checked)
+	        			{
+		        			play[j] = true;
+	        			}
+	        			else
+	        			{
+		        			play[j] = false;
+	        			}
+        			}
+        			
+        			var input = document.getElementById("file");
+        			var i = document.getElementById("image");
+					var imgurl = i.src;
+					//var blob = new Blob([imgurl], { type: "text/plain" });
+					imgurl = imgurl.substring(0, imgurl.length - 2)
+
+                    sql = 'insert into peopleinfo VALUES ("'+x.txtfname.value+'","'+x.txtlname.value+'","'+x.txtaddress.value+'",'+x.txtpin.value+','+x.txtmobile.value+',"'+g+'","'+x.dob.value+'","'+x.email.value+'","'+play[0]+'","'+play[1]+'","'+play[2]+'","'+play[3]+'","'+h[0]+'","'+h[1]+'","'+imgurl+'")';
+					console.log(sql);
+                    
+      		        executeQuery(sql,function(results){});
+      		        
+      		         
+        		}
+    	              
+     		}catch(e)
+     		{
+                 alert("Mobile number must be different");
+            }			
+		}
+
+		
+		function loadfile()
+		{
+			var input = document.getElementById("file");
+
+			if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+		}
+		function loadvideo()
+		{
+			var input = document.getElementById("videofile");
+
+			if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#myvideo').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+		}
+		function executeQuery($query,callback){
+		     try{
+		         if(window.openDatabase){
+		         db.transaction(
+		         function(tx){
+		         tx.executeSql($query,[],function(tx,result){
+		         if(typeof(callback) == "function"){
+		                 callback(result);
+		         }else{
+		                 if(callback != undefined){
+		                       eval(callback+"(result)");
+		                  }
+		         }
+		         },function(tx,error){});
+		          });
+		           return rslt;
+		         }
+		         }catch(e){}
+		         }
+			function bluremail(y)
+			{
+				if(!validateEmail(y))
+				{
+					if(y.value != "")
+					{
+						
+						y.value = "";
+						y.focus();
+					}
+				}
+			}
+        function getrow()
+        {
+            try{
+                if(window.openDatabase)
+                {
+                	db.transaction(function(tx) {
+                		   tx.executeSql("SELECT count(*) FROM peopleinfo", [],
+                		      function(tx, result) {
+                		         mrow = result.rows.item(0)["count(*)"];
+                		         mrow = mrow -1;
+                		         sessionStorage.mrow = mrow;
+                		      },
+                		      function(tx, error){
+                		         // error occured
+                		      }
+                		   );
+                   		});
+				}
+                }
+                
+            catch(e)
+            {
+
+            }
+            
+        }
+		function txtareafocus()
+		{
+			var check = new RegExp("Enter");
+			var a = document.frminput.txtaddress.value;
+			if(check.test(a))
+			{
+				document.frminput.txtaddress.value = "";
+			}
+		}
+		function selhobbiesblur()
+		{
+			var t = document.frminput.selhobbies;
+			var x = 0;
+			for(i = 0;i< 6;i++)
+			{
+				if(t.options[i].selected)
+				{
+					x++;
+				}
+			}
+			if(x>=3)
+			{
+				for(i = 0;i< 6;i++)
+				{
+					if(t.options[i].selected)
+					{
+						t.options[i].selected = false;
+					}
+				}
+				t.title = "Choose only 2 hobbies";
+			}
+			else
+			{
+				t.title = "";
+			}
+		}
+		function setupdatebtn()
+		{
+			if(frminput.txtmobile.value == "")
+			{
+				frminput.btnupdate.disabled = true;
+			}
+			else if(frminput.txtmobile.value != "")
+			{
+				frminput.btnupdate.disabled = false;
+			}
+		}
+		function deleteit()
+		{
+			try{
+            	if(window.openDatabase)
+              	{
+              		var shortName = 'mydb';
+              		var version = '3';
+              		var displayName = 'user info';
+              		var maxSize = 65536;
+              		db = openDatabase(shortName, version, displayName, maxSize);
+              		var sql = 'delete from peopleinfo where mobile = "'+document.frminput.txtmobile.value+'"';
+              		executeQuery(sql);
+              		
+					
+        		}
+    	              
+     		}catch(e)
+     		{
+                 alert("Unable to delete");
+            }
+		}
+		function txtpinblur()
+		{
+			var a = document.frminput.txtpin.value;
+			if(a != "")
+			{
+			if((a > 110000)&& (a<859999))
+			{
+				document.frminput.txtpin.title = "";
+				
+			} 
+			else
+			{
+				document.frminput.txtpin.value = "";
+				document.frminput.txtpin.title = "Invalid pin";
+				document.frminput.txtpin.focus();
+			}
+			}
+		}
+		function txtmobileblur()
+		{
+			var a = document.frminput.txtmobile.value;
+			if(a != "")
+			{
+			if((a > 8000000000)&& (a <= 9999999999))
+			{
+				document.frminput.txtmobile.title = "";
+			} 
+			else
+			{
+				document.frminput.txtmobile.value = "";
+				document.frminput.txtmobile.title = "Invalid Mobile No.";
+				document.frminput.txtmobile.focus();
+			}
+			}
+			setupdatebtn();
+		}
+		function submitnot()
+		{
+			return false();
+		}
+		function setpin()
+		{
+			frminput.txtpin.value = frminput.pinpoints.value;
+		}
+	</script>
+	<script>
+	$(document).ready(function(){
+		var canvas = document.getElementById("mycanvas");
+		var ctx = canvas.getContext("2d");
+		$("#mycanvas").mousemove(function(event){
+			ctx.lineTo(event.pageX,event.pageY);
+			ctx.stroke();
+			
+		});
+		$("#mycanvas").mouseenter(function(){
+			ctx.moveTo(event.pageX,event.pageY);				
+		});
+		  $(".field").focus(function(){
+		    $(this).css("background-color","#cccccc");
+		  });
+
+		  $(".field").blur(function(){
+			    $(this).css("background-color","#ffffff");
+			  });
+
+		  $("#btnsubmit").click(function(){
+			  	var t = document.frminput;
+			  	var r = 0;
+			    if((t.txtfname.value == "")||(t.txtfname.value == null))
+			    {
+				    r++;
+			    	$("#txtfname").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    var check = new RegExp("Enter");
+			    if((t.txtaddress.value == "")||(t.txtaddress.value == null)|| check.test(document.frminput.txtaddress.value))
+			    {
+				    r++;
+			    	$("#txtaddress").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    if((t.txtpin.value == "")||(t.txtpin.value == null))
+			    {
+				    r++;
+			    	$("#txtpin").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    if((t.txtmobile.value == "")||(t.txtmobile.value == null))
+			    {
+				    r++;
+			    	$("#txtmobile").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    
+			    if((t.dob.value == "")||(t.dob.value == null) ||(Date.parse(t.dob.value) <= Date.parse(today)))
+			    {
+				    r++;
+			    	$("#dob").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    if((t.email.value == "")||(t.email.value == null))
+			    {
+				    r++;
+			    	$("#email").css("background-color","#FFFF00").attr("title","Required Field, cannot be left blank");
+			    }
+			    if(r == 0)
+			    {
+				    savedata();
+			    }
+			    
+			  });
+		});
+	</script>
+</head>
+<body onload="loadfunc()">
+	<center>
+		<h1>Welcome</h1>
+		<form name="frminput" id="frminput" onsubmit="return submitnot()">
+		<table id="tb;"><tr><td>
+		<table id="tbl">
+			<tr>
+				<td>First Name*</td>
+				<td><input required type="text" name="txtfname" id = "txtfname" class="field" size="50"/></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input type="text" name="txtlname" id="txtlname" class="field" size="50" list="surname"/>
+					<datalist id="surname">
+  						<option value="Sharma">
+  						<option value="Verma">
+  						<option value="Kumar">
+  						<option value="Panwar">
+  						<option value="Singh">
+					</datalist>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Address*</td>
+				<td><textarea required name="txtaddress" id="txtaddress" class="field" rows="3" cols="39" maxlength="100" onfocus="txtareafocus()">Enter Your address</textarea></td>
+			</tr>
+			<tr>
+				<td>Pin code*</td>
+				<td><input id="txtpin" required type="text" name="txtpin" class="field" size="50" onBlur="txtpinblur()"/>
+					<br/>
+					<input type="range" name="pinpoints" min="110000" max="859999" onchange="setpin()"/>
+				</td>
+			</tr>
+			<tr>
+				<td>Mobile No.*</td>
+				<td><input id="txtmobile" required type="number" min="8000000000" max="9999999999" name="txtmobile" class="field" size="50" onchange="setupdatebtn()" onBlur="txtmobileblur()"/></td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td><input type="radio" id="male" name="gender" class="field" value="male" checked="checked"/>Male</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="radio" id = "female" name="gender" class="field" value="female"/>Female</td>
+			</tr>
+			<tr>
+				<td>Email ID*</td>
+				<td><input id = "email" required type="email" name="email" class="field" size="50" onblur="bluremail(this)"/></td>
+			</tr>
+			<tr>
+				<td>D.O.B*</td>
+				<td><input id = "dob" required type="date" name="dob" class="field" size="50" min = "1950-12-31" max="2000-12-31"/></td>
+			</tr>
+			<tr>
+				<td valign="top">Sports Played</td>
+				<td>
+					<input type="checkbox" name="chkbox" value="Cricket"/>Cricket<br>
+					<input type="checkbox" name="chkbox" value="Football"/>Football<br>
+					<input type="checkbox" name="chkbox" value="BasketBall"/>Basketball<br>
+					<input type="checkbox" name="chkbox" value="Baseball"/>Baseball<br>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Hobbies</td>
+				<td><select name="selhobbies" multiple="multiple" size="3" title="Hold ctrl to select multiple hobbies" onBlur="selhobbiesblur()">
+					<option value="reading">Reading</option>
+					<option value="cricket">Cricket</option>
+					<option value="football">Football</option>
+					<option value="listen">Listen to Songs</option>
+					<option value="watch">Watching Movies</option>
+					<option value="videogame">Video Games</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Your snap</td>
+				<td><input type="file" id="file" name="file" class="field" onmouseout="loadfile()"/></td>
+			</tr>
+			
+		</table></td>
+		<td><h3>Play your favorite media here:</h3><br/>
+		<input type="file" id="videofile" name="videofile" class="field" onchange="loadvideo()"/><br/>
+			<video width="320" height="240" name="myvideo" id="myvideo" controls autoplay>
+  				
+  			</video><br>
+  			<canvas id="mycanvas" width="200" height="200"></canvas>
+  			
+  			<br>
+			<img src="" height="200" accept="image/*" width="200" id="image" name="image" class="field" alt="you pic"/>
+		</td>
+		</tr>
+		</table>
+		<input type="button" Value="&lt;&lt;" name="btnfirst" onclick="display(this)"/>
+		<input type="button" Value="&lt;" name="btnpre" onclick="display(this)"/>
+		<input type="button" Value="&gt;" name="btnnext" onclick="display(this)"/>
+		<input type="button" Value="&gt;&gt;" name = "btnlast" onclick="display(this)"/>
+		<input type="button" Value="Show Table" onclick="display1()"/>
+		<input type="Submit" Value="submit" id="btnsubmit"/>
+		<input type="button" Value="Delete" id="btndelete" onclick="deleteit()"/>
+		<input type="button" Value="Update" id="btnupdate" onclick="updateit()"/>
+		<input type = "reset" Value="Reset" onClick="resetit()"/>
+		</form>
+		
+		<div id="mydiv"></div>
+	</center>
+</body>
+</html>

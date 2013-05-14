@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            changing the image 
+        </title>
+    </head>
+    <body>
+        <script>
+        	function changeImage () {
+			  element=document.getElementById('myimage');
+			  if(element.src.match("one")){
+			  	element.src="..\image\three.jpg" ;
+			  }
+			  	else{
+			  		element.src="..\image\one.jpg" ;
+			  	}
+			  	console.log(element.src);
+			  	alert(element.src);
+			  }
+        </script>
+    </body>
+    <h1>My JavaScripting Example</h1>
+    <img id="myimage" src="..\image\one.jpg" width="300" height="300" onclick="changeImage()"/>
+    
+    
+</html>

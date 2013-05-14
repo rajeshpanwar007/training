@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Showing date
+        </title>
+    </head>
+    <body>
+        <p>click below to show the date</p>
+        <button id="mybt">Clcik me!</button>
+        <script>
+        	document.getElementById("mybt").onclick=function(){
+        		displaydate()
+        	};
+        	function displaydate(){
+        		document.getElementById("demo").innerHTML=Date();
+        	}
+        </script>
+        <p id="demo"></p>
+        
+        
+    </body>
+    
+</html>

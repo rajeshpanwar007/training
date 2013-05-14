@@ -1,0 +1,14 @@
+500  sudo -i
+  501  sudo /etc/init.d/apache2 restart
+  502  cd /var/www/enclood_new/
+  503  ls
+  504  cd ..
+  505  cd
+  506  wget http://www.youtube.com/watch?v=WRBogaUCSUM
+  507  sudo wget http://www.youtube.com/watch?v=WRBogaUCSUM
+  508  ls /etc/apache2/
+  509  cd /etc/apache2/apache2.conf
+  510  sudo gedit /etc/apache2/apache2.conf
+  511  sudo /etc/init.d/apace2 restart
+  512  sudo /etc/init.d/apache2 restart
+  513  history

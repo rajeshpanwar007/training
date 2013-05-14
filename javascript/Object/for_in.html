@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            using the object Constructor
+        </title>
+    </head>
+    <body>
+        <script>
+        	function getPerson(){
+        		var x;
+        		myfather={fname:"Azad Singh",lname:"Panwar",age:62};
+        		
+        		var txt="";
+        		for(x in myfather)
+        		{
+        			txt=txt+myfather[x];
+        		}
+        		document.write(txt);
+        	}
+        </script>
+    </body>
+    	<button type="button" onclick="getPerson()">Click me</button>
+</html>

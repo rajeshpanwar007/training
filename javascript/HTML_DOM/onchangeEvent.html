@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            onchange event Example
+        </title>
+        <script>
+        	function change () {
+			  var x=document.getElementById("name");
+			  x.value=x.value.toUpperCase();
+			}
+        </script>
+    </head>
+    <body>
+        <p>Content of input element will be converted into the uppercase when u leave it</p>
+        Name :<input  id="name" type="text" onchange="change()"/>
+      	<!--
+      		Email id<input  id="email" type="text" onchange=uppercase()/>
+      		-->
+    </body>
+    
+</html>

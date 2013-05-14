@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            hiding the element
+        </title>
+        <style>
+            h1.hidden{
+                visibility:hidden;
+            }
+            h1.hidden2{
+                display:none;
+            }
+            table{
+                height:300px;
+                width:300px;
+            }
+            td.wi{
+                width:50%;
+                background-color:green;
+            }
+            span{
+                display:block;
+            }
+            li{
+                display:inline;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td class="wi">
+                    <h1> this content is in h1 tag without style</h1>
+                     <h1 class="hidden"> this content is hidden</h1>
+                     this is the content within the td tag
+                </td>
+                 <td style="background-color:yellow">
+                    <h1> this content is in h1 tag without style</h1>
+                     <h1 class="hidden2"> this content is hidden</h1>
+                     this is the content within the td tag
+                </td>
+            </tr>
+         </table>
+         <br>
+         this is text within the span tag<span>address:</span><span>sonapat</span><span>haryana</span> 
+         <br>        
+            <ul>
+                <li>tea</li>
+                <li>coffee</li>
+                <li>milk</li>
+            </ul>  
+    </body>
+    
+</html>

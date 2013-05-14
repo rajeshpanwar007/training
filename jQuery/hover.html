@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            hover example
+        </title>
+        <script src="jquery8.js">       	
+        </script>
+        <script>
+        	$(document).ready(function() {
+			  $("#one").hover(function(){
+			  	alert("Mouse enter in!!!!");
+			  },
+			  function(){
+			  	alert("Mouse leaves out!!!!");
+			  });
+			});
+        </script>
+    </head>
+    <body>
+        <h3>Hover event Example</h3>
+        <p id="one"  style="background-color:#FF0000;width:200px;height:60px;padding:40px">
+        	See the hover effect
+        </p>
+    </body>
+    
+</html>
